@@ -1,4 +1,11 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#codeQuest()
+
+## Team codeQuest()
+
+[Emanuele Pace](https://github.com/Emanuele-20)
+[Benedetta Arinci](https://github.com/BeneArinci)
+[Anthony Donovan](https://github.com/ad13380)
+[Chris Cooney](https://github.com/ChrisCooney05)
 
 ## Available Scripts
 
