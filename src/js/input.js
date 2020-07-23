@@ -12,16 +12,17 @@ export default class Input {
       let inputString = document.getElementById("userInput").value
       this._stringToArray(inputString)
       this.player.start(this.inputArray);
+      this.inputArray = []
+      //document.getElementById("userInput").value = ""
     });
   }
 
   _stringToArray(inputString) {
     inputString.split('\n').forEach(input => {
-      if (this._formatInput(input) != "") {
+      if (this._formatInput(input) !== "") {
         this.inputArray.push(this._formatInput(input))
       }
     })
-    console.log(this.inputArray)
   }
 
   _formatInput(input) {
