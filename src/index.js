@@ -5,7 +5,9 @@ import App from "./components/App";
 import Player from "./js/player";
 import Input from "./js/input";
 import Map from './js/map'
+import Collision from "./collision";
 import * as serviceWorker from "./serviceWorker";
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,9 +19,13 @@ ReactDOM.render(
 // define grid size
 const GRID_SIZE = 30;
 
+// define game area rows and columns
+const GAME_ROWS = 9;
+const GAME_COLUMNS = 16;
+
 // define game area size
-const GAME_HEIGHT = 9 * GRID_SIZE;
-const GAME_WIDTH = 16 * GRID_SIZE;
+const GAME_HEIGHT = GAME_ROWS * GRID_SIZE;
+const GAME_WIDTH = GAME_COLUMNS * GRID_SIZE;
 
 // placeholder level map
 let gridMap =
@@ -33,32 +39,6 @@ let gridMap =
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-const collisionObject =  { 
-  2:function(object, row, column) {
-    //if (this.topCollision(object, row)) { return; }
-    this.leftCollision(object, column);
-  },
-
-  leftCollision(object, column) {
-    if (object.vel.x > 0) {// If the object is moving right
-      var leftSide = column * GRID_SIZE;// calculate the left side of the collision tile
-      if (object.x + object.width * 0.5 > leftSide && object.oldPosition.x <= leftSide) {
-        object.vel.x = 0;// Stop moving
-        object.x = object.oldPosition.x = leftSide - object.width * 0.5 - 0.01;
-        return true;
-      }
-    }
-    return false;
-  }
-}
-
-
-console.log(collisionObject.leftCollision)
-
-
-
-
-
 // placeholder for the winning tile
 let winningTile = {
   x: 5,
@@ -68,22 +48,19 @@ let winningTile = {
 // define canvas
 let canvas = document.getElementById("gameArea");
 let ctx = canvas.getContext("2d");
-// player instance
+// instances
 let player = new Player(GAME_HEIGHT, GAME_WIDTH, GRID_SIZE);
-// input instance
 let input = new Input(player);
 let map = new Map(player, ctx, gridMap, GRID_SIZE, GAME_WIDTH, GAME_HEIGHT, winningTile);
+let collision = new Collision(player, gridMap, GRID_SIZE)
 
 // modify canvas size
 canvas.height = GAME_HEIGHT;
 canvas.width = GAME_WIDTH;
 
-
 // game loop
 let lastTime = 0;
 function gameLoop(timestamp) {
-  console.log(player.tilePosition.x, player.position.x)
-
   let deltaTime = timestamp - lastTime;
   lastTime = timestamp;
   // map.checkWin()
@@ -92,7 +69,8 @@ function gameLoop(timestamp) {
   player.update(deltaTime);
   map.isWithinX()
 
-
+  let value_at_index = gridMap[player.tilePosition.y * 16 + player.tilePosition.x]
+  collision.collisionObject[value_at_index](player)
 
   player.draw(ctx);
   requestAnimationFrame(gameLoop);
