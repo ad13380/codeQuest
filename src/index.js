@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./components/App";
 import Player from "./js/player";
-import Input from "./js/input"
+import Input from "./js/input";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
@@ -15,6 +15,7 @@ ReactDOM.render(
 
 // define grid size
 const GRID_SIZE = 30;
+
 
 // define game area size
 const GAME_HEIGHT = 9 * GRID_SIZE;
@@ -67,6 +68,7 @@ gameLoop();
 
 // event listeners
 input.listenForPlay()
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
