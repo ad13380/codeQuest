@@ -13,7 +13,7 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-let userInput = document.getElementById("userInput");
+// let userInput = document.getElementById("userInput");
 let canvas = document.getElementById("gameArea");
 let ctx = canvas.getContext("2d");
 
