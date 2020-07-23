@@ -1,23 +1,20 @@
 import Player from "../js/player";
-import { wait } from "@testing-library/react";
 
 describe("Player", () => {
   let player;
   let moveRight;
   let moveLeft;
-
+  let initial_position;
 
   beforeEach(() => {
     player = new Player(600, 800, 30)
+    initial_position = {
+      x: player.position.x,
+      y: player.position.y
+    }
     moveRight = ["player.moveRight()"]
     moveLeft = ["player.moveLeft()"]
   })
-
-  wait((ms) => {
-    return new Promise(
-      resolve => setTimeout(resolve, ms)
-    ); 
-  });
 
   test("test player construncts width and height", () => {
     expect(player.gameWidth).toEqual(800)
@@ -26,20 +23,33 @@ describe("Player", () => {
 
   test("player can move to the right", () => {
     player.moveRight()
-    expect(player.vel.x).toEqual(10)
+    player.update('deltaTime')
+    expect(player.position.x).toEqual(initial_position.x + player.speed )
   } )
 
   test("player can move to the left", () => {
     player.moveLeft()
-    expect(player.vel.x).toEqual(-10)
+    player.update('deltaTime')
+    expect(player.position.x).toEqual(initial_position.x - player.speed )
   } )
 
-  test("player starts moving when passed moves", () => {
+  test("player starts moving when passed a single moveRight", () => {
     player.start(moveRight)
-    expect(player.vel.x).toEqual(10)
-    player.start(moveLeft)
-    expect(player.vel.x).toEqual(-10)
+    player.update('deltaTime')
+    expect(player.position.x).toEqual(initial_position.x + player.speed )
   } )
+
+  test("player starts moving when passed a single moveLeft", () => {
+    player.start(moveLeft)
+    player.update('deltaTime')
+    expect(player.position.x).toEqual(initial_position.x - player.speed )
+  } )
+
+  // test("player is drawn on canvas", () => {
+  //   const ctxMock = jest.fn();
+  //   player.draw(ctxMock)
+  //   expect(ctxMock.mock.calls).toEqual([])
+  // })
 
 
 

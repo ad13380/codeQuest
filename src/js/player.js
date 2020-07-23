@@ -46,22 +46,22 @@ export default class Player {
     this._applyFriction()
 
     // collision detection? 
-    if (this.position.x < 0) this.position.x = 0;
-    if (this.position.x + this.width > this.gameWidth)
-      this.position.x = this.gameWidth - this.width;
+    // if (this.position.x < 0) this.position.x = 0;
+    // if (this.position.x + this.width > this.gameWidth)
+    //   this.position.x = this.gameWidth - this.width;
   } //these will add the collision for both the right and left boundary
 
   async moveRight() {
     this.vel.x = this.speed;
-    await this.wait(1000)
+    await this._wait(1000)
   }
 
   async moveLeft() {
     this.vel.x = -this.speed;
-    await this.wait(1000)
+    await this._wait(1000)
   }
 
-  wait(ms) {
+  _wait(ms) {
     return new Promise(
       resolve => setTimeout(resolve, ms)
     );
