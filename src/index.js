@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./components/App";
@@ -40,7 +40,7 @@ let ctx = canvas.getContext("2d");
 let player = new Player(GAME_HEIGHT, GAME_WIDTH, GRID_SIZE);
 // input instance
 let input = new Input(player);
-let map = new Map(player, ctx, gridMap, GRID_SIZE);
+let map = new Map(player, ctx, gridMap, GRID_SIZE, GAME_WIDTH, GAME_HEIGHT);
 
 // modify canvas size
 canvas.height = GAME_HEIGHT;
@@ -52,7 +52,7 @@ let lastTime = 0;
 function gameLoop(timestamp) {
   let deltaTime = timestamp - lastTime;
   lastTime = timestamp;
-  ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+  map.clearMap()
   map.drawMap()
   player.update(deltaTime);
   map.isWithinX()

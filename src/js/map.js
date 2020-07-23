@@ -1,9 +1,11 @@
 export default class Map {
-  constructor(player, ctx, gridMap, gridSize) {
+  constructor(player, ctx, gridMap, gridSize, gameWidth, gameHeight) {
     this.player = player
     this.ctx = ctx
     this.gridMap = gridMap
     this.GRID_SIZE = gridSize
+    this.GAME_WIDTH = gameWidth
+    this.GAME_HEIGHT = gameHeight
   }
 
   isWithinX() {
@@ -17,5 +19,11 @@ export default class Map {
       this.ctx.fillStyle = (this.gridMap[index] === 1) ? "#B7DFE1" : "#CCF2F4";
       this.ctx.fillRect((index % 16) * this.GRID_SIZE, Math.floor(index / 16) * this.GRID_SIZE, this.GRID_SIZE, this.GRID_SIZE);
     }
-  };
+  }
+
+
+  clearMap(){
+    this.ctx.clearRect(0, 0, this.GAME_WIDTH, this.GAME_HEIGHT);
+  }
+
 }
