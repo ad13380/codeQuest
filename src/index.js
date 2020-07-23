@@ -36,6 +36,8 @@ let gridMap = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
                1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
                1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 
+
+
 let drawMap = function() {
 for (let index = 0; index < gridMap.length; index ++) {
 ctx.fillStyle = (gridMap[index] === 1) ? "#B7DFE1" : "#CCF2F4";
@@ -55,7 +57,7 @@ ctx.fillRect((index % 16) * GRID_SIZE, Math.floor(index/16) * GRID_SIZE, GRID_SI
 // canvas.height = GAME_HEIGHT;
 // canvas.width = GAME_WIDTH;
 
-let player = new Player(GAME_HEIGHT, GAME_WIDTH);
+let player = new Player(GAME_HEIGHT, GAME_WIDTH, GRID_SIZE);
 let input = new Input(player);
 
 let lastTime = 0;

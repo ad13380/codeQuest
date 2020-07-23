@@ -1,16 +1,25 @@
 export default class Player {
-  constructor(gameHeight, gameWidth) {
+  constructor(gameHeight, gameWidth, gridSize) {
     // game area size
     this.gameHeight = gameHeight;
     this.gameWidth = gameWidth;
-    // object size
-    this.height = 30;
-    this.width = 30;
+    this.gridSize = gridSize;
+
+      // object size
+      this.height = 30;
+      this.width = 30;
+
     // object position
     this.position = {
       x: 0,
       y: this.gameHeight - this.height,
     };
+  
+
+    this.tilePosition = {
+      x: this.position.x/this.gridSize
+    }
+
     //movement value
     this.moveIncrement = {
       x: 30,
@@ -35,9 +44,9 @@ export default class Player {
   }
 
   update(deltaTime) {
-    if (!deltaTime) return;
-
-    //console.log(this.position.x)
+    if (!deltaTime) return
+    // console.log(this.gridSize)
+    // console.log(this.tilePosition.x)
 
     this.position.x += this.vel.x;
     this.vel.x *= this.friction;
