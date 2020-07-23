@@ -16,6 +16,7 @@ ReactDOM.render(
 let canvas = document.getElementById("gameArea");
 let ctx = canvas.getContext("2d");
 
+// define grid size
 const GRID_SIZE = 30;
 
 // define game area size
@@ -39,10 +40,10 @@ let gridMap = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 
 
 let drawMap = function() {
-for (let index = 0; index < gridMap.length; index ++) {
-ctx.fillStyle = (gridMap[index] === 1) ? "#B7DFE1" : "#CCF2F4";
-ctx.fillRect((index % 16) * GRID_SIZE, Math.floor(index/16) * GRID_SIZE, GRID_SIZE, GRID_SIZE);
-}
+  for (let index = 0; index < gridMap.length; index ++) {
+    ctx.fillStyle = (gridMap[index] === 1) ? "#B7DFE1" : "#CCF2F4";
+    ctx.fillRect((index % 16) * GRID_SIZE, Math.floor(index/16) * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+  }
 };
 
 
@@ -50,7 +51,6 @@ ctx.fillRect((index % 16) * GRID_SIZE, Math.floor(index/16) * GRID_SIZE, GRID_SI
 // define game area size
 // const GAME_HEIGHT = 600;
 // const GAME_WIDTH = 800;
-
 
 
 // // modify canvas size
@@ -70,13 +70,11 @@ function gameLoop(timestamp) {
   player.update(deltaTime);
   player.draw(ctx);
 
-
   requestAnimationFrame(gameLoop);
 }
 
 gameLoop();
 input.listenForPlay()
-
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
