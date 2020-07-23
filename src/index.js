@@ -13,9 +13,6 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-let canvas = document.getElementById("gameArea");
-let ctx = canvas.getContext("2d");
-
 // define grid size
 const GRID_SIZE = 30;
 
@@ -23,10 +20,7 @@ const GRID_SIZE = 30;
 const GAME_HEIGHT = 9 * GRID_SIZE;
 const GAME_WIDTH = 16 * GRID_SIZE;
 
-// modify canvas size
-canvas.height = GAME_HEIGHT;
-canvas.width = GAME_WIDTH;
-
+// placeholder level map
 let gridMap = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
                1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
                1,0,1,1,1,0,0,1,0,0,1,0,0,1,0,1,
@@ -37,8 +31,19 @@ let gridMap = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
                1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
                1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 
+// define canvas
+let canvas = document.getElementById("gameArea");
+let ctx = canvas.getContext("2d");
+// player instance
+let player = new Player(GAME_HEIGHT, GAME_WIDTH, GRID_SIZE);
+// input instance
+let input = new Input(player);
 
+// modify canvas size
+canvas.height = GAME_HEIGHT;
+canvas.width = GAME_WIDTH;
 
+// placeholder draw map function
 let drawMap = function() {
   for (let index = 0; index < gridMap.length; index ++) {
     ctx.fillStyle = (gridMap[index] === 1) ? "#B7DFE1" : "#CCF2F4";
@@ -46,22 +51,8 @@ let drawMap = function() {
   }
 };
 
-
-
-// define game area size
-// const GAME_HEIGHT = 600;
-// const GAME_WIDTH = 800;
-
-
-// // modify canvas size
-// canvas.height = GAME_HEIGHT;
-// canvas.width = GAME_WIDTH;
-
-let player = new Player(GAME_HEIGHT, GAME_WIDTH, GRID_SIZE);
-let input = new Input(player);
-
+// game loop
 let lastTime = 0;
-
 function gameLoop(timestamp) {
   let deltaTime = timestamp - lastTime;
   lastTime = timestamp;
@@ -72,8 +63,9 @@ function gameLoop(timestamp) {
 
   requestAnimationFrame(gameLoop);
 }
-
 gameLoop();
+
+// event listeners
 input.listenForPlay()
 
 // If you want your app to work offline and load faster, you can change
