@@ -13,8 +13,10 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
+
 // define grid size
 const GRID_SIZE = 30;
+
 
 
 // define game area size
