@@ -36,7 +36,7 @@ export default class Player {
 
   draw(ctx) {
     ctx.fillStyle = 'black'
-    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+    return ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
 
   update(deltaTime) {
@@ -44,20 +44,20 @@ export default class Player {
 
     this._updatePosition()
     this._applyFriction()
-
   }
+
 
   async moveRight() {
     this.vel.x = this.speed;
-    await this.wait(1000)
+    await this._wait(1000)
   }
 
   async moveLeft() {
     this.vel.x = -this.speed;
-    await this.wait(1000)
+    await this._wait(1000)
   }
 
-  wait(ms) {
+  _wait(ms) {
     return new Promise(
       resolve => setTimeout(resolve, ms)
     );
