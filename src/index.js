@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./components/App";
 import Player from "./js/player";
 import Input from "./js/input";
+import Map from './js/map'
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
@@ -24,15 +25,16 @@ const GAME_HEIGHT = 9 * GRID_SIZE;
 const GAME_WIDTH = 16 * GRID_SIZE;
 
 // placeholder level map
-let gridMap = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-               1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-               1,0,1,1,1,0,0,1,0,0,1,0,0,1,0,1,
-               1,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,
-               1,0,0,1,0,0,0,1,0,1,1,1,0,1,0,1,
-               1,0,0,1,0,1,0,1,0,1,0,0,0,0,0,1,
-               1,0,0,1,0,1,0,1,0,0,1,1,0,1,0,1,
-               1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-               1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+let gridMap =
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1,
+    1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
+    1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1,
+    1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1,
+    1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1,
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
 // define canvas
 let canvas = document.getElementById("gameArea");
@@ -41,16 +43,17 @@ let ctx = canvas.getContext("2d");
 let player = new Player(GAME_HEIGHT, GAME_WIDTH, GRID_SIZE);
 // input instance
 let input = new Input(player);
+let map = new Map(player);
 
 // modify canvas size
 canvas.height = GAME_HEIGHT;
 canvas.width = GAME_WIDTH;
 
 // placeholder draw map function
-let drawMap = function() {
-  for (let index = 0; index < gridMap.length; index ++) {
+let drawMap = function () {
+  for (let index = 0; index < gridMap.length; index++) {
     ctx.fillStyle = (gridMap[index] === 1) ? "#B7DFE1" : "#CCF2F4";
-    ctx.fillRect((index % 16) * GRID_SIZE, Math.floor(index/16) * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+    ctx.fillRect((index % 16) * GRID_SIZE, Math.floor(index / 16) * GRID_SIZE, GRID_SIZE, GRID_SIZE);
   }
 };
 
@@ -62,8 +65,8 @@ function gameLoop(timestamp) {
   ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
   drawMap()
   player.update(deltaTime);
+  map.isWithinX()
   player.draw(ctx);
-
   requestAnimationFrame(gameLoop);
 }
 gameLoop();

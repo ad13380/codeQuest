@@ -15,8 +15,8 @@ export default class Player {
     };
     // player position (tile)
     this.tilePosition = {
-      x: Math.floor(this.position.x/this.gridSize),
-      y: Math.floor(this.position.y/this.gridSize)
+      x: Math.floor(this.position.x / this.gridSize),
+      y: Math.floor(this.position.y / this.gridSize)
     }
     // player velocity
     this.vel = {
@@ -45,11 +45,7 @@ export default class Player {
     this._updatePosition()
     this._applyFriction()
 
-    // collision detection? 
-    if (this.position.x < 0) this.position.x = 0;
-    if (this.position.x + this.width > this.gameWidth)
-      this.position.x = this.gameWidth - this.width;
-  } //these will add the collision for both the right and left boundary
+  }
 
   async moveRight() {
     this.vel.x = this.speed;
@@ -65,7 +61,7 @@ export default class Player {
     return new Promise(
       resolve => setTimeout(resolve, ms)
     );
-  }  
+  }
 
   async start(inputArray) {
     for (let i = 0; i < inputArray.length; i++) {
@@ -83,14 +79,14 @@ export default class Player {
         await this.moveLeft();
         break;
     }
-  }  
+  }
 
   // only for X axis 
   _updatePosition() {
     // update px x-position
     this.position.x += this.vel.x;
     // update tile x-position
-    this.tilePosition.x =  Math.floor(this.position.x/this.gridSize)
+    this.tilePosition.x = Math.floor(this.position.x / this.gridSize)
   }
 
   _applyFriction() {
