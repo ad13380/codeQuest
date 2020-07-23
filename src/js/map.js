@@ -1,11 +1,12 @@
 export default class Map {
-  constructor(player, ctx, gridMap, gridSize, gameWidth, gameHeight) {
+  constructor(player, ctx, gridMap, gridSize, gameWidth, gameHeight, winningTile) {
     this.player = player
     this.ctx = ctx
     this.gridMap = gridMap
     this.GRID_SIZE = gridSize
     this.GAME_WIDTH = gameWidth
     this.GAME_HEIGHT = gameHeight
+    this.winningTile = winningTile
   }
 
   isWithinX() {
@@ -14,15 +15,21 @@ export default class Map {
       this.player.position.x = this.player.gameWidth - this.player.width;
   }
 
-   drawMap() {
+  drawMap() {
     for (let index = 0; index < this.gridMap.length; index++) {
       this.ctx.fillStyle = (this.gridMap[index] === 1) ? "#B7DFE1" : "#CCF2F4";
       this.ctx.fillRect((index % 16) * this.GRID_SIZE, Math.floor(index / 16) * this.GRID_SIZE, this.GRID_SIZE, this.GRID_SIZE);
     }
   }
 
+  // checkWin() {
+  //   let xCheck = this.winningTile.x === Math.floor(this.player.position.x / this.GRID_SIZE);
+  //   let yCheck = this.winningTile.y === Math.floor(this.player.position.y / this.GRID_SIZE);
+  //   let playerVel = this.player.vel.x === 0 && this.player.vel.y === 0
+  //   if (xCheck && yCheck && playerVel) alert('Win')
+  // }
 
-  clearMap(){
+  clearMap() {
     this.ctx.clearRect(0, 0, this.GAME_WIDTH, this.GAME_HEIGHT);
   }
 

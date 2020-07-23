@@ -33,6 +33,12 @@ let gridMap =
     1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
+// placeholder for the winning tile
+let winningTile = {
+  x: 5,
+  y: 8
+}
+
 // define canvas
 let canvas = document.getElementById("gameArea");
 let ctx = canvas.getContext("2d");
@@ -40,7 +46,7 @@ let ctx = canvas.getContext("2d");
 let player = new Player(GAME_HEIGHT, GAME_WIDTH, GRID_SIZE);
 // input instance
 let input = new Input(player);
-let map = new Map(player, ctx, gridMap, GRID_SIZE, GAME_WIDTH, GAME_HEIGHT);
+let map = new Map(player, ctx, gridMap, GRID_SIZE, GAME_WIDTH, GAME_HEIGHT, winningTile);
 
 // modify canvas size
 canvas.height = GAME_HEIGHT;
@@ -52,6 +58,7 @@ let lastTime = 0;
 function gameLoop(timestamp) {
   let deltaTime = timestamp - lastTime;
   lastTime = timestamp;
+  // map.checkWin()
   map.clearMap()
   map.drawMap()
   player.update(deltaTime);
