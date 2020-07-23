@@ -45,14 +45,13 @@ describe("Player", () => {
     expect(player.position.x).toEqual(initial_position.x - player.speed )
   } )
 
-  // test("player is drawn on canvas", () => {
-  //   const ctxMock = jest.fn();
-  //   player.draw(ctxMock)
-  //   expect(ctxMock.mock.calls).toEqual([])
-  // })
-
-
-
+  test("player is drawn on canvas", () => {
+    let ctx = {
+      fillStyle: '',
+      fillRect:  function () { return 'changed' }
+    }
+    expect(player.draw(ctx)).toEqual('changed')
+  })
 }) // describe
 
 // test("renders learn react link", () => {
