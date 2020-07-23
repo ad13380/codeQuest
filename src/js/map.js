@@ -1,5 +1,5 @@
 export default class Map {
-  constructor(player) {
+  constructor(player, ctx) {
     this.player = player
   }
 

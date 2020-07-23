@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./components/App";
@@ -43,13 +43,13 @@ let ctx = canvas.getContext("2d");
 let player = new Player(GAME_HEIGHT, GAME_WIDTH, GRID_SIZE);
 // input instance
 let input = new Input(player);
-let map = new Map(player);
+let map = new Map(player, ctx);
 
 // modify canvas size
 canvas.height = GAME_HEIGHT;
 canvas.width = GAME_WIDTH;
 
-// placeholder draw map function
+
 let drawMap = function () {
   for (let index = 0; index < gridMap.length; index++) {
     ctx.fillStyle = (gridMap[index] === 1) ? "#B7DFE1" : "#CCF2F4";
