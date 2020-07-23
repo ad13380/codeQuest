@@ -25,6 +25,11 @@ describe("Input", () => {
     expect(input.inputArray).toEqual([])
   })
 
+  test('splits input with linebreaks into an array of inputs', () => {
+    let string = ('test\ntest1   \n   \n   test2')
+    input._stringToArray(string)
+    expect(input.inputArray).toEqual(['test', 'test1', 'test2'])
+  })
 
 
 })
