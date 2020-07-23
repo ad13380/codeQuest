@@ -23,15 +23,43 @@ const GAME_WIDTH = 16 * GRID_SIZE;
 
 // placeholder level map
 let gridMap =
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-    1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1,
-    1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-    1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1,
-    1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1,
-    1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1,
-    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+const collisionObject =  { 
+  2:function(object, row, column) {
+
+    //if (this.topCollision(object, row)) { return; }
+    this.leftCollision(object, column);
+
+  },
+
+  leftCollision(object, column) {
+    if (object.vel.x > 0) {// If the object is moving right
+      var leftSide = column * GRID_SIZE;// calculate the left side of the collision tile
+      if (object.x + object.width * 0.5 > leftSide && object.oldPosition.x <= leftSide) {
+        object.vel.x = 0;// Stop moving
+        object.x = object.oldPosition.x = leftSide - object.width * 0.5 - 0.01;
+        return true;
+      }
+    }
+    return false;
+  }
+}
+
+
+console.log(collisionObject.leftCollision)
+
+
+
+
 
 // placeholder for the winning tile
 let winningTile = {

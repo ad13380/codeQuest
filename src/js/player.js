@@ -18,6 +18,10 @@ export default class Player {
       x: Math.floor(this.position.x / this.gridSize),
       y: Math.floor(this.position.y / this.gridSize)
     }
+    this.oldPosition = {
+      x: this.position.x,
+      y: this.position.y
+    }
     // player velocity
     this.vel = {
       x: 0,

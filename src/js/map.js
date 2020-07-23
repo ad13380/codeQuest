@@ -17,7 +17,7 @@ export default class Map {
 
   drawMap() {
     for (let index = 0; index < this.gridMap.length; index++) {
-      this.ctx.fillStyle = (this.gridMap[index] === 1) ? "#B7DFE1" : "#CCF2F4";
+      this._selectGridStyle(index)
       this.ctx.fillRect((index % 16) * this.GRID_SIZE, Math.floor(index / 16) * this.GRID_SIZE, this.GRID_SIZE, this.GRID_SIZE);
     }
   }
@@ -33,4 +33,15 @@ export default class Map {
     this.ctx.clearRect(0, 0, this.GAME_WIDTH, this.GAME_HEIGHT);
   }
 
+  _selectGridStyle(index) {
+    // eslint-disable-next-line default-case
+    switch (this.gridMap[index]) {
+      case 0:
+        this.ctx.fillStyle = "#CCF2F4"
+        break;
+      case 1:
+        this.ctx.fillStyle = "#B7DFE1"
+        break;
+    }
+  }
 }
