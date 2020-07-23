@@ -42,6 +42,9 @@ export default class Map {
       case 1:
         this.ctx.fillStyle = "#B7DFE1"
         break;
+      case 2:
+        this.ctx.fillStyle = "#E1C0B7"
+        break;
     }
   }
 }

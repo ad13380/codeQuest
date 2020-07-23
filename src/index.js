@@ -31,14 +31,12 @@ let gridMap =
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 const collisionObject =  { 
   2:function(object, row, column) {
-
     //if (this.topCollision(object, row)) { return; }
     this.leftCollision(object, column);
-
   },
 
   leftCollision(object, column) {
@@ -84,6 +82,8 @@ canvas.width = GAME_WIDTH;
 // game loop
 let lastTime = 0;
 function gameLoop(timestamp) {
+  console.log(player.tilePosition.x, player.position.x)
+
   let deltaTime = timestamp - lastTime;
   lastTime = timestamp;
   // map.checkWin()
@@ -91,6 +91,9 @@ function gameLoop(timestamp) {
   map.drawMap()
   player.update(deltaTime);
   map.isWithinX()
+
+
+
   player.draw(ctx);
   requestAnimationFrame(gameLoop);
 }

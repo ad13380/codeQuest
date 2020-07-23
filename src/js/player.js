@@ -15,8 +15,8 @@ export default class Player {
     };
     // player position (tile)
     this.tilePosition = {
-      x: Math.floor(this.position.x / this.gridSize),
-      y: Math.floor(this.position.y / this.gridSize)
+      x: Math.round(this.position.x / this.gridSize),
+      y: Math.round(this.position.y / this.gridSize)
     }
     this.oldPosition = {
       x: this.position.x,
@@ -90,7 +90,7 @@ export default class Player {
     // update px x-position
     this.position.x += this.vel.x;
     // update tile x-position
-    this.tilePosition.x = Math.floor(this.position.x / this.gridSize)
+    this.tilePosition.x = Math.round(this.position.x / this.gridSize)
   }
 
   _applyFriction() {
