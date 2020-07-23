@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./components/App";
 import Player from "./js/player";
-import Input from "./js/input"
+import Input from "./js/input";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
@@ -13,10 +13,8 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-let userInput = document.getElementById("userInput");
 let canvas = document.getElementById("gameArea");
 let ctx = canvas.getContext("2d");
-
 
 // define game area size
 const GAME_HEIGHT = 600;
@@ -43,8 +41,7 @@ function gameLoop(timestamp) {
 }
 
 gameLoop();
-input.listenForPlay()
-
+input.listenForPlay();
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
