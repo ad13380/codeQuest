@@ -1,15 +1,14 @@
 export default class Collision {
-  constructor(player, gridMap, gridSize) {
+  constructor(player, gridMap, gridSize, gameColumns) {
     this.player = player;
     this.gridMap = gridMap;
     this.gridSize = gridSize;
+    this.gameColumns = gameColumns;
   }
 
-  get collisionObject() {
-    return {
-      0: () => {},
-      2: () => { this.leftCollision(); }
-    }
+  detect() {
+    let value_at_index = this.gridMap[this.player.tilePosition.y * this.gameColumns + this.player.tilePosition.x]
+    this._collisionObject[value_at_index]()
   }
 
   leftCollision() {
@@ -20,6 +19,13 @@ export default class Collision {
       return true;
     }
     return false;
+  }
+
+  get _collisionObject() {
+    return {
+      0: () => {},
+      2: () => { this.leftCollision(); }
+    }
   }
 
   _pushBack(increment) {

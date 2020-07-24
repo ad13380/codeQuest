@@ -52,7 +52,7 @@ let ctx = canvas.getContext("2d");
 let player = new Player(GAME_HEIGHT, GAME_WIDTH, GRID_SIZE);
 let input = new Input(player);
 let map = new Map(player, ctx, gridMap, GRID_SIZE, GAME_WIDTH, GAME_HEIGHT, winningTile);
-let collision = new Collision(player, gridMap, GRID_SIZE)
+let collision = new Collision(player, gridMap, GRID_SIZE, GAME_COLUMNS)
 
 // modify canvas size
 canvas.height = GAME_HEIGHT;
@@ -69,8 +69,7 @@ function gameLoop(timestamp) {
   player.update(deltaTime);
   map.isWithinX()
 
-  let value_at_index = gridMap[player.tilePosition.y * 16 + player.tilePosition.x]
-  collision.collisionObject[value_at_index](player)
+  collision.detect()
 
   player.draw(ctx);
   requestAnimationFrame(gameLoop);
