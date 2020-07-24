@@ -8,22 +8,17 @@ export default class Collision {
   }
 
   detect() {
-    let value_at_index = this.gridMap[this.player.tilePosition.y * this.gameColumns + this.player.tilePosition.x]
+    this.boundaryCollision();
+
+    let tilePosition_x = Math.round(this.player.position.x / this.gridSize)
+    let tilePosition_y = Math.ceil(this.player.position.y / this.gridSize)
+    let value_at_index = this.gridMap[tilePosition_y * this.gameColumns + tilePosition_x]
     this._collisionObject[value_at_index]()
   }
 
-  leftCollision() {
-    let leftSide = this.player.tilePosition.x * this.gridSize;
-    if (this.player.vel.x > 0) { // moving right
-      this.player.position.x = leftSide - this.gridSize * 0.5;
-      this._pushBack(- this.gridSize * 0.5)
-      return true;
-    }
-    return false;
-  }
-
   topCollision() {
-    let topSide = this.player.tilePosition.y * this.gridSize;
+    let tilePosition_y = Math.ceil(this.player.position.y / this.gridSize)
+    let topSide = tilePosition_y * this.gridSize;
     if (this.player.vel.y > 0) { // moving down
       this.player.vel.y = 0;
       this.player.position.y = topSide - this.player.height;
@@ -32,15 +27,30 @@ export default class Collision {
     return false;
   }
 
+  boundaryCollision() {
+    // left right
+    if (this.player.getLeft < 0) { 
+      this.player.setLeft = 0;             
+      this.player.vel.x = 0; 
+    } else if (this.player.getRight > this.gridSize * this.gameColumns) { 
+      this.player.setRight = this.gridSize * this.gameColumns;   
+      this.player.vel.x = 0; 
+    }
+    // top bottom
+    if (this.player.getTop < 0) { 
+      this.player.setTop = 0;             
+      this.player.vel.y = 0; 
+    } else if (this.player.getBottom > this.gridSize * this.gameRows) { 
+      this.player.setBottom = this.gridSize * this.gameRows;   
+      this.player.vel.y = 0; 
+    }
+  }
+
   get _collisionObject() {
     return {
       0: () => {},
       1: () => { this.topCollision(); },
-      2: () => { this.leftCollision(); }
+      2: () => { }
     }
-  }
-
-  _pushBack(increment) {
-    this.player.vel.x = increment * (1 - this.player.friction);
   }
 }

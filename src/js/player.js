@@ -2,22 +2,17 @@ export default class Player {
   constructor(gameRows, gameColumns, gridSize) {
     // grid size
     this.gridSize = gridSize;
-    // game area size
-    this.gameHeight = this.gridSize * gameRows;
-    this.gameWidth = this.gridSize * gameColumns;
+    // game size
+    this.gameRows = gameRows;
+    this.gameColumns = gameColumns;
     // player size
     this.height = this.gridSize;
     this.width = this.gridSize;
     // player position (px)
     this.position = {
       x: 0,
-      y: this.gameHeight - this.height - 3 * this.gridSize,
+      y: this.gridSize * this.gameRows - this.height - 3 * this.gridSize,
     };
-    // player position (tile)
-    this.tilePosition = {
-      x: Math.round(this.position.x / this.gridSize),
-      y: Math.ceil(this.position.y / this.gridSize)
-    }
     // player velocity
     this.vel = {
       x: 0,
@@ -102,9 +97,6 @@ export default class Player {
     // update px position
     this.position.x += this.vel.x;
     this.position.y += this.vel.y;
-    // update tile position
-    this.tilePosition.x = Math.round(this.position.x / this.gridSize)
-    this.tilePosition.y = Math.ceil(this.position.y / this.gridSize)
   }
 
   _applyFriction() {
@@ -114,4 +106,14 @@ export default class Player {
   _applyGravity() {
     this.vel.y += this.gravity;
   }
+
+  // collision methods
+  get getBottom()  { return this.position.y + this.height; }
+  get getTop()     { return this.position.y;               }
+  get getLeft()    { return this.position.x;               }
+  get getRight()   { return this.position.x + this.width;  }
+  set setBottom(y) { this.position.y = y - this.height;    }
+  set setTop(y)    { this.position.y = y;                  }
+  set setLeft(x)   { this.position.x = x;                  }
+  set setRight(x)  { this.position.x = x - this.width;     }
 }

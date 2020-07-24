@@ -61,7 +61,7 @@ function gameLoop(timestamp) {
   map.clearMap()
   map.drawMap()
   player.update(deltaTime);
-  map.isWithinX()
+  //map.isWithinX() // included in collision file
 
   collision.detect() // this has been added
 
