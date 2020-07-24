@@ -16,11 +16,6 @@ describe("Player", () => {
     moveLeft = ["player.moveLeft()"]
   })
 
-  test("test player construncts width and height", () => {
-    expect(player.gameWidth).toEqual(800)
-    expect(player.gameHeight).toEqual(600)
-  } )
-
   test("player can move to the right", () => {
     player.moveRight()
     player.update('deltaTime')

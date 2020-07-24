@@ -1,22 +1,22 @@
 export default class Player {
-  constructor(gameHeight, gameWidth, gridSize) {
-    // game area size
-    this.gameHeight = gameHeight;
-    this.gameWidth = gameWidth;
+  constructor(gameRows, gameColumns, gridSize) {
     // grid size
     this.gridSize = gridSize;
+    // game area size
+    this.gameHeight = this.gridSize * gameRows;
+    this.gameWidth = this.gridSize * gameColumns;
     // player size
-    this.height = 30;
-    this.width = 30;
+    this.height = this.gridSize;
+    this.width = this.gridSize;
     // player position (px)
     this.position = {
       x: 0,
-      y: this.gameHeight - this.height,
+      y: this.gameHeight - this.height - 3 * this.gridSize,
     };
     // player position (tile)
     this.tilePosition = {
-      x: Math.floor(this.position.x / this.gridSize),
-      y: Math.floor(this.position.y / this.gridSize)
+      x: Math.round(this.position.x / this.gridSize),
+      y: Math.ceil(this.position.y / this.gridSize)
     }
     // player velocity
     this.vel = {
@@ -25,13 +25,17 @@ export default class Player {
     };
     //movement value
     this.moveIncrement = {
-      x: 30,
-      y: 30,
+      x: this.gridSize, 
+      y: 0
     };
     // speed
     this.speed = 10;
+    // jump speed
+    this.jumpSpeed = 8;
     // friction
     this.friction = 1 - this.speed / this.moveIncrement.x;
+    // gravity
+    this.gravity = 0.5;
   }
 
   draw(ctx) {
@@ -44,8 +48,8 @@ export default class Player {
 
     this._updatePosition()
     this._applyFriction()
+    this._applyGravity()
   }
-
 
   async moveRight() {
     this.vel.x = this.speed;
@@ -54,6 +58,12 @@ export default class Player {
 
   async moveLeft() {
     this.vel.x = -this.speed;
+    await this._wait(1000)
+  }
+
+  async jumpRight() {
+    this.vel.y -= this.jumpSpeed;
+    this.vel.x = this.speed;
     await this._wait(1000)
   }
 
@@ -78,18 +88,30 @@ export default class Player {
       case "player.moveLeft()":
         await this.moveLeft();
         break;
+      case "player.jumpRight()":
+        await this.jumpRight();
+        break;
+      case "player.jumpLeft()":
+        await this.jumpLeft();
+        break;
     }
   }
 
   // only for X axis 
   _updatePosition() {
-    // update px x-position
+    // update px position
     this.position.x += this.vel.x;
-    // update tile x-position
-    this.tilePosition.x = Math.floor(this.position.x / this.gridSize)
+    this.position.y += this.vel.y;
+    // update tile position
+    this.tilePosition.x = Math.round(this.position.x / this.gridSize)
+    this.tilePosition.y = Math.ceil(this.position.y / this.gridSize)
   }
 
   _applyFriction() {
     this.vel.x *= this.friction;
+  }
+
+  _applyGravity() {
+    this.vel.y += this.gravity;
   }
 }

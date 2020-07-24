@@ -5,7 +5,9 @@ import App from "./components/App";
 import Player from "./js/player";
 import Input from "./js/input";
 import Map from './js/map'
+import Collision from "./js/collision";
 import * as serviceWorker from "./serviceWorker";
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,23 +16,21 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-// define grid size
+// define game area
 const GRID_SIZE = 30;
-
-// define game area size
-const GAME_HEIGHT = 9 * GRID_SIZE;
-const GAME_WIDTH = 16 * GRID_SIZE;
+const GAME_ROWS = 9;
+const GAME_COLUMNS = 16;
 
 // placeholder level map
 let gridMap =
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-    1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1,
-    1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-    1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1,
-    1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1,
-    1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1,
-    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
 // placeholder for the winning tile
@@ -39,19 +39,18 @@ let winningTile = {
   y: 8
 }
 
-// define canvas
+// canvas
 let canvas = document.getElementById("gameArea");
 let ctx = canvas.getContext("2d");
-// player instance
-let player = new Player(GAME_HEIGHT, GAME_WIDTH, GRID_SIZE);
-// input instance
+// instances
+let player = new Player(GAME_ROWS, GAME_COLUMNS, GRID_SIZE);
 let input = new Input(player);
-let map = new Map(player, ctx, gridMap, GRID_SIZE, GAME_WIDTH, GAME_HEIGHT, winningTile);
+let map = new Map(player, ctx, gridMap, GRID_SIZE, GAME_ROWS, GAME_COLUMNS, winningTile);
+let collision = new Collision(player, gridMap, GRID_SIZE, GAME_ROWS, GAME_COLUMNS)
 
-// modify canvas size
-canvas.height = GAME_HEIGHT;
-canvas.width = GAME_WIDTH;
-
+// set canvas size
+canvas.height = GAME_ROWS * GRID_SIZE;
+canvas.width = GAME_COLUMNS * GRID_SIZE;
 
 // game loop
 let lastTime = 0;
@@ -63,6 +62,9 @@ function gameLoop(timestamp) {
   map.drawMap()
   player.update(deltaTime);
   map.isWithinX()
+
+  collision.detect() // this has been added
+
   player.draw(ctx);
   requestAnimationFrame(gameLoop);
 }

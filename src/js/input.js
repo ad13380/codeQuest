@@ -2,7 +2,7 @@ export default class Input {
   constructor(player) {
     this.player = player
     this.btnPlay = document.getElementById("play");
-    this.validInputs = ['player.moveRight()', 'player.moveLeft()']
+    this.validInputs = ['player.moveRight()', 'player.moveLeft()', 'player.jumpRight()', 'player.jumpLeft()']
     this.inputArray = []
 
   }
