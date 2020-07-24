@@ -23,15 +23,11 @@ export default class Collision {
   }
 
   topCollision() {
-    if (this.player.vel.y > 0) {
-
-      var topSide = this.player.tilePosition.y * this.gridSize;
-
-      if (this.player.position.y + this.player.height > topSide) {
-        this.player.vel.y = 0;
-        this.player.position.y = topSide - this.player.height;
-        return true;
-      }
+    let topSide = this.player.tilePosition.y * this.gridSize;
+    if (this.player.vel.y > 0 && this.player.position.y + this.player.height > topSide) {
+      this.player.vel.y = 0;
+      this.player.position.y = topSide - this.player.height;
+      return true;
     }
     return false;
   }

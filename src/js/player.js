@@ -11,12 +11,12 @@ export default class Player {
     // player position (px)
     this.position = {
       x: 0,
-      y: this.gameHeight - this.height - this.gridSize - 10,
+      y: this.gameHeight - this.height - 3 * this.gridSize,
     };
     // player position (tile)
     this.tilePosition = {
       x: Math.round(this.position.x / this.gridSize),
-      y: Math.round(this.position.y / this.gridSize)
+      y: Math.ceil(this.position.y / this.gridSize)
     }
     // player velocity
     this.vel = {
@@ -25,13 +25,17 @@ export default class Player {
     };
     //movement value
     this.moveIncrement = {
-      x: this.gridSize,
+      x: this.gridSize, 
       y: 0
     };
     // speed
     this.speed = 10;
+    // jump speed
+    this.jumpSpeed = 8;
     // friction
     this.friction = 1 - this.speed / this.moveIncrement.x;
+    // gravity
+    this.gravity = 0.5;
   }
 
   draw(ctx) {
@@ -42,13 +46,10 @@ export default class Player {
   update(deltaTime) {
     if (!deltaTime) return
 
-    console.log(this.position.y, this.tilePosition.y)
-
     this._updatePosition()
     this._applyFriction()
     this._applyGravity()
   }
-
 
   async moveRight() {
     this.vel.x = this.speed;
@@ -57,6 +58,12 @@ export default class Player {
 
   async moveLeft() {
     this.vel.x = -this.speed;
+    await this._wait(1000)
+  }
+
+  async jumpRight() {
+    this.vel.y -= this.jumpSpeed;
+    this.vel.x = this.speed;
     await this._wait(1000)
   }
 
@@ -81,6 +88,12 @@ export default class Player {
       case "player.moveLeft()":
         await this.moveLeft();
         break;
+      case "player.jumpRight()":
+        await this.jumpRight();
+        break;
+      case "player.jumpLeft()":
+        await this.jumpLeft();
+        break;
     }
   }
 
@@ -99,6 +112,6 @@ export default class Player {
   }
 
   _applyGravity() {
-    this.vel.y += 0.9;
+    this.vel.y += this.gravity;
   }
 }

@@ -18,7 +18,7 @@ describe("Input", () => {
   })
 
   test("if class has a list of valid input", () => {
-    expect(input.validInputs).toEqual(['player.moveRight()', 'player.moveLeft()'])
+    expect(input.validInputs).toEqual(['player.moveRight()', 'player.moveLeft()', 'player.jumpRight()', 'player.jumpLeft()'])
   })
 
   test("if class has a empty input array", () => {
