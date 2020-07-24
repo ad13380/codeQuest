@@ -5,13 +5,14 @@ export default class Player {
     this.gameWidth = gameWidth;
     // grid size
     this.gridSize = gridSize;
-    // player size
-    this.height = 30;
-    this.width = 30;
+    // methods for setting info about the image when creating the instance
+    this._setSize()
+    this._setImage()
+    this._setFrames()
     // player position (px)
     this.position = {
       x: 0,
-      y: this.gameHeight - this.height,
+      y: this.gameHeight - this.SCALED_HEIGHT,
     };
     // player position (tile)
     this.tilePosition = {
@@ -35,8 +36,17 @@ export default class Player {
   }
 
   draw(ctx) {
-    ctx.fillStyle = 'black'
-    return ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+    // ctx.fillStyle = 'black'
+    this._setSides()
+    return ctx.drawImage(this.image, 
+      this.frameX * this.WIDTH,
+      this.frameY * this.HEIGHT,
+      this.WIDTH, 
+      this.HEIGHT, 
+      this.position.x,
+      this.position.y,
+      this.SCALED_WIDTH,
+      this.SCALED_HEIGHT);
   }
 
   update(deltaTime) {
@@ -81,6 +91,34 @@ export default class Player {
     }
   }
 
+  _setImage(){
+    this.image = new Image();
+    this.image.src = "./assets/warrior.png"
+  }
+
+  _setSize(){
+    this.SCALE = 0.7;
+    this.WIDTH = 64;
+    this.HEIGHT = 64;
+    this.SCALED_WIDTH = this.SCALE * this.WIDTH;
+    this.SCALED_HEIGHT = this.SCALE * this.HEIGHT;
+  }
+
+  _setSides(){
+    this.top    = this.position.y
+    this.bottom = this.position.y + this.SCALED_HEIGHT
+    this.right  = this.position.x + this.SCALED_WIDTH - 20
+    this.left   = this.position.x + 20
+  }
+
+  _setFrames(){
+    //this.CYCLE_LOOP = [0, 1, 0, 2];
+    //this.increment = 0
+    this.frameX = 0;
+    this.frameY = 11;
+    //this.score = 0;
+  }
+
   // only for X axis 
   _updatePosition() {
     // update px x-position
@@ -92,4 +130,53 @@ export default class Player {
   _applyFriction() {
     this.vel.x *= this.friction;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //x and y coordinates to render the sprite 
+// var x=0;
+// var y=0; 
+
+// //x and y coordinates of the canvas to get the single frame 
+// var srcX=0; 
+// var srcY=0; 
+
+// //tracking the movement left and write 
+// var left = false;
+
+//                   //Assuming that at start the character will move right side 
+// var right = true;
+
+// //Speed of the movement 
+// var speed = 12; 
+
+// //Getting the canvas 
+// var canvas = document.getElementById('canvas');
+
+// //setting width and height of the canvas 
+// canvas.width = canvasWidth;
+// canvas.height = canvasHeight; 
+
+// //Establishing a context to the canvas 
+// var ctx = canvas.getContext("2d");
+
+// //Creating an Image object for our character 
+// var character = new Image(); 
+
+// //Setting the source to the image file 
+// character.src = "character.png";
+
+
 }
