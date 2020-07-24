@@ -4,9 +4,9 @@ function Header() {
   return (
     <div >
       <a href="/play">Play</a>
+      <a href="/instructions">Instructions</a>
       <div>
         <h1>CodeQuest()</h1>
-        <p> Just have fun </p>
       </div>
     </div>
   );
