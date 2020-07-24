@@ -14,7 +14,7 @@ export default class Collision {
 
   leftCollision() {
     let leftSide = this.player.tilePosition.x * this.gridSize;
-    if (this.player.vel.x > 0 && this.player.position.x + this.player.width * 0.5 > leftSide) {
+    if (this.player.vel.x > 0) { // moving right
       this.player.position.x = leftSide - this.gridSize * 0.5;
       this._pushBack(- this.gridSize * 0.5)
       return true;
@@ -24,7 +24,7 @@ export default class Collision {
 
   topCollision() {
     let topSide = this.player.tilePosition.y * this.gridSize;
-    if (this.player.vel.y > 0 && this.player.position.y + this.player.height > topSide) {
+    if (this.player.vel.y > 0) { // moving down
       this.player.vel.y = 0;
       this.player.position.y = topSide - this.player.height;
       return true;
