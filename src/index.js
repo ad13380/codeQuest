@@ -38,40 +38,42 @@ let winningTile = {
   x: 5,
   y: 8
 }
-
-// canvas
+//canvas
 let canvas = document.getElementById("gameArea");
-let ctx = canvas.getContext("2d");
-// instances
-let player = new Player(GAME_ROWS, GAME_COLUMNS, GRID_SIZE);
-let input = new Input(player);
-let map = new Map(player, ctx, gridMap, GRID_SIZE, GAME_ROWS, GAME_COLUMNS, winningTile);
-let collision = new Collision(player, gridMap, GRID_SIZE, GAME_ROWS, GAME_COLUMNS)
+if (canvas !== null) {
 
-// set canvas size
-canvas.height = GAME_ROWS * GRID_SIZE;
-canvas.width = GAME_COLUMNS * GRID_SIZE;
+  let ctx = canvas.getContext("2d");
+  // instances
+  let player = new Player(GAME_ROWS, GAME_COLUMNS, GRID_SIZE);
+  let input = new Input(player);
+  let map = new Map(player, ctx, gridMap, GRID_SIZE, GAME_ROWS, GAME_COLUMNS, winningTile);
+  let collision = new Collision(player, gridMap, GRID_SIZE, GAME_ROWS, GAME_COLUMNS)
 
-// game loop
-let lastTime = 0;
-function gameLoop(timestamp) {
-  let deltaTime = timestamp - lastTime;
-  lastTime = timestamp;
-  // map.checkWin()
-  map.clearMap()
-  map.drawMap()
-  player.update(deltaTime);
-  map.isWithinX()
+  // set canvas size
+  canvas.height = GAME_ROWS * GRID_SIZE;
+  canvas.width = GAME_COLUMNS * GRID_SIZE;
 
-  collision.detect() // this has been added
+  // game loop
+  let lastTime = 0;
+  function gameLoop(timestamp) {
+    let deltaTime = timestamp - lastTime;
+    lastTime = timestamp;
+    // map.checkWin()
+    map.clearMap()
+    map.drawMap()
+    player.update(deltaTime);
+    map.isWithinX()
 
-  player.draw(ctx);
-  requestAnimationFrame(gameLoop);
+    collision.detect() // this has been added
+
+    player.draw(ctx);
+    requestAnimationFrame(gameLoop);
+  }
+  gameLoop();
+
+  // event listeners
+  input.listenForPlay()
 }
-gameLoop();
-
-// event listeners
-input.listenForPlay()
 
 
 // If you want your app to work offline and load faster, you can change

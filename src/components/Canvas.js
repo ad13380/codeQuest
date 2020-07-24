@@ -3,10 +3,10 @@ import TextArea from "./TextArea"
 
 function Canvas() {
   return (
-  <div>
-  <canvas id="gameArea"></canvas>
-  <TextArea/>
-  </div>
+    <div>
+      <canvas id="gameArea"></canvas>
+      <TextArea />
+    </div>
   )
 }
 
