@@ -1,8 +1,9 @@
 export default class Collision {
-  constructor(player, gridMap, gridSize, gameColumns) {
+  constructor(player, gridMap, gridSize, gameRows, gameColumns) {
     this.player = player;
     this.gridMap = gridMap;
     this.gridSize = gridSize;
+    this.gameRows = gameRows
     this.gameColumns = gameColumns;
   }
 
@@ -21,9 +22,24 @@ export default class Collision {
     return false;
   }
 
+  topCollision() {
+    if (this.player.vel.y > 0) {
+
+      var topSide = this.player.tilePosition.y * this.gridSize;
+
+      if (this.player.position.y + this.player.height > topSide) {
+        this.player.vel.y = 0;
+        this.player.position.y = topSide - this.player.height;
+        return true;
+      }
+    }
+    return false;
+  }
+
   get _collisionObject() {
     return {
       0: () => {},
+      1: () => { this.topCollision(); },
       2: () => { this.leftCollision(); }
     }
   }

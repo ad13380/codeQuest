@@ -1,12 +1,12 @@
 export default class Map {
-  constructor(player, ctx, gridMap, gridSize, gameWidth, gameHeight, winningTile) {
-    this.player = player
-    this.ctx = ctx
-    this.gridMap = gridMap
-    this.GRID_SIZE = gridSize
-    this.GAME_WIDTH = gameWidth
-    this.GAME_HEIGHT = gameHeight
-    this.winningTile = winningTile
+  constructor(player, ctx, gridMap, gridSize, gameRows, gameColumns, winningTile) {
+    this.player = player;
+    this.ctx = ctx;
+    this.gridMap = gridMap;
+    this.GRID_SIZE = gridSize;
+    this.GAME_ROWS = gameRows;
+    this.GAME_COLUMNS = gameColumns;
+    this.winningTile = winningTile;
   }
 
   isWithinX() {
@@ -18,7 +18,7 @@ export default class Map {
   drawMap() {
     for (let index = 0; index < this.gridMap.length; index++) {
       this._selectGridStyle(index)
-      this.ctx.fillRect((index % 16) * this.GRID_SIZE, Math.floor(index / 16) * this.GRID_SIZE, this.GRID_SIZE, this.GRID_SIZE);
+      this.ctx.fillRect((index % this.GAME_COLUMNS) * this.GRID_SIZE, Math.floor(index / this.GAME_COLUMNS) * this.GRID_SIZE, this.GRID_SIZE, this.GRID_SIZE);
     }
   }
 
@@ -30,7 +30,7 @@ export default class Map {
   // }
 
   clearMap() {
-    this.ctx.clearRect(0, 0, this.GAME_WIDTH, this.GAME_HEIGHT);
+    this.ctx.clearRect(0, 0, this.gridSize * this.GAME_COLUMNS, this.gridSize * this.GAME_ROWS);
   }
 
   _selectGridStyle(index) {

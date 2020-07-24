@@ -5,7 +5,7 @@ import App from "./components/App";
 import Player from "./js/player";
 import Input from "./js/input";
 import Map from './js/map'
-import Collision from "./collision";
+import Collision from "./js/collision";
 import * as serviceWorker from "./serviceWorker";
 
 
@@ -16,16 +16,10 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-// define grid size
+// define game area
 const GRID_SIZE = 30;
-
-// define game area rows and columns
 const GAME_ROWS = 9;
 const GAME_COLUMNS = 16;
-
-// define game area size
-const GAME_HEIGHT = GAME_ROWS * GRID_SIZE;
-const GAME_WIDTH = GAME_COLUMNS * GRID_SIZE;
 
 // placeholder level map
 let gridMap =
@@ -37,7 +31,7 @@ let gridMap =
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    1, 1, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 // placeholder for the winning tile
 let winningTile = {
@@ -45,18 +39,18 @@ let winningTile = {
   y: 8
 }
 
-// define canvas
+// canvas
 let canvas = document.getElementById("gameArea");
 let ctx = canvas.getContext("2d");
 // instances
-let player = new Player(GAME_HEIGHT, GAME_WIDTH, GRID_SIZE);
+let player = new Player(GAME_ROWS, GAME_COLUMNS, GRID_SIZE);
 let input = new Input(player);
-let map = new Map(player, ctx, gridMap, GRID_SIZE, GAME_WIDTH, GAME_HEIGHT, winningTile);
-let collision = new Collision(player, gridMap, GRID_SIZE, GAME_COLUMNS)
+let map = new Map(player, ctx, gridMap, GRID_SIZE, GAME_ROWS, GAME_COLUMNS, winningTile);
+let collision = new Collision(player, gridMap, GRID_SIZE, GAME_ROWS, GAME_COLUMNS)
 
-// modify canvas size
-canvas.height = GAME_HEIGHT;
-canvas.width = GAME_WIDTH;
+// set canvas size
+canvas.height = GAME_ROWS * GRID_SIZE;
+canvas.width = GAME_COLUMNS * GRID_SIZE;
 
 // game loop
 let lastTime = 0;
@@ -69,7 +63,7 @@ function gameLoop(timestamp) {
   player.update(deltaTime);
   map.isWithinX()
 
-  collision.detect()
+  collision.detect() // this has been added
 
   player.draw(ctx);
   requestAnimationFrame(gameLoop);

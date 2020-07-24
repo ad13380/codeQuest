@@ -9,7 +9,7 @@ describe("Map", () => {
 
   beforeEach(()=>{
     player = new Player()
-    map = new Map(player, "ctx", "gridMap", "gridSize", "gameWidth", "gameHeight", "winningTile")
+    map = new Map(player, "ctx", "gridMap", "gridSize", "gameRows", "gameColumns", "winningTile")
     Player.mockClear()
   })
 

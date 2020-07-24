@@ -1,26 +1,22 @@
 export default class Player {
-  constructor(gameHeight, gameWidth, gridSize) {
-    // game area size
-    this.gameHeight = gameHeight;
-    this.gameWidth = gameWidth;
+  constructor(gameRows, gameColumns, gridSize) {
     // grid size
     this.gridSize = gridSize;
+    // game area size
+    this.gameHeight = this.gridSize * gameRows;
+    this.gameWidth = this.gridSize * gameColumns;
     // player size
     this.height = 30;
     this.width = 30;
     // player position (px)
     this.position = {
       x: 0,
-      y: this.gameHeight - this.height,
+      y: this.gameHeight - this.height - this.gridSize - 10,
     };
     // player position (tile)
     this.tilePosition = {
       x: Math.round(this.position.x / this.gridSize),
       y: Math.round(this.position.y / this.gridSize)
-    }
-    this.oldPosition = {
-      x: this.position.x,
-      y: this.position.y
     }
     // player velocity
     this.vel = {
@@ -29,8 +25,8 @@ export default class Player {
     };
     //movement value
     this.moveIncrement = {
-      x: 30,
-      y: 30,
+      x: this.gridSize,
+      y: 0
     };
     // speed
     this.speed = 10;
@@ -46,8 +42,11 @@ export default class Player {
   update(deltaTime) {
     if (!deltaTime) return
 
+    console.log(this.position.y, this.tilePosition.y)
+
     this._updatePosition()
     this._applyFriction()
+    this._applyGravity()
   }
 
 
@@ -87,13 +86,19 @@ export default class Player {
 
   // only for X axis 
   _updatePosition() {
-    // update px x-position
+    // update px position
     this.position.x += this.vel.x;
-    // update tile x-position
+    this.position.y += this.vel.y;
+    // update tile position
     this.tilePosition.x = Math.round(this.position.x / this.gridSize)
+    this.tilePosition.y = Math.ceil(this.position.y / this.gridSize)
   }
 
   _applyFriction() {
     this.vel.x *= this.friction;
+  }
+
+  _applyGravity() {
+    this.vel.y += 0.9;
   }
 }
