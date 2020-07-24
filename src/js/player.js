@@ -12,7 +12,7 @@ export default class Player {
     // player position (px)
     this.position = {
       x: 0,
-      y: this.gameHeight - this.SCALED_HEIGHT,
+      y: this.gameHeight - this.gridSize,
     };
     // player position (tile)
     this.tilePosition = {
@@ -37,7 +37,7 @@ export default class Player {
 
   draw(ctx) {
     // ctx.fillStyle = 'black'
-    this._setSides()
+    // this._setSides()
     return ctx.drawImage(this.image, 
       this.frameX * this.WIDTH,
       this.frameY * this.HEIGHT,
@@ -97,19 +97,19 @@ export default class Player {
   }
 
   _setSize(){
-    this.SCALE = 0.7;
+    this.SCALE = 0.46875;
     this.WIDTH = 64;
     this.HEIGHT = 64;
     this.SCALED_WIDTH = this.SCALE * this.WIDTH;
     this.SCALED_HEIGHT = this.SCALE * this.HEIGHT;
   }
 
-  _setSides(){
-    this.top    = this.position.y
-    this.bottom = this.position.y + this.SCALED_HEIGHT
-    this.right  = this.position.x + this.SCALED_WIDTH - 20
-    this.left   = this.position.x + 20
-  }
+  // _setSides(){
+  //   this.top    = this.position.y
+  //   this.bottom = this.position.y + this.SCALED_HEIGHT
+  //   this.right  = this.position.x + this.SCALED_WIDTH - 20
+  //   this.left   = this.position.x + 20
+  // }
 
   _setFrames(){
     //this.CYCLE_LOOP = [0, 1, 0, 2];
