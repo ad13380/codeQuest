@@ -6,8 +6,8 @@ export default class Player {
     this.gameHeight = this.gridSize * gameRows;
     this.gameWidth = this.gridSize * gameColumns;
     // player size
-    this.height = 30;
-    this.width = 30;
+    this.height = this.gridSize;
+    this.width = this.gridSize;
     // player position (px)
     this.position = {
       x: 0,
