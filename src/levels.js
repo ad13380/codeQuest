@@ -12,7 +12,7 @@ const levels = [
 
     winningTile: {
       x: 5,
-      y: 7
+      y: 6
     }
   },
   {
@@ -28,7 +28,7 @@ const levels = [
 
     winningTile: {
       x: 5,
-      y: 7
+      y: 6
     }
   },
   {
@@ -44,7 +44,7 @@ const levels = [
 
     winningTile: {
       x: 5,
-      y: 7
+      y: 6
     }
   },
 ]
