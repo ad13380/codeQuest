@@ -13,7 +13,3 @@ test("renders text area", () => {
   const textarea = getByTestId('testtextarea');
   expect(textarea).toBeInTheDocument();
 });
-
-
-
-
