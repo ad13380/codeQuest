@@ -49,8 +49,6 @@ export default class Player {
   update(deltaTime) {
     if (!deltaTime) return
 
-    console.log(this.position.x)
-
     this._updatePosition()
     this._limitJumpDistance()
     this._applyFriction()
@@ -58,14 +56,25 @@ export default class Player {
   }
 
   async moveRight() {
-    this.vel.x = this.groundSpeed;
-    this._addOffset(1)
-    await this._wait(700)
+    if (!this.isJumping) {
+      this.vel.x = this.groundSpeed;
+      this._addOffset(1)
+      await this._wait(700) // change back
+    } else {
+      await this._wait(50)
+      await this.moveRight()
+    }
   }
 
   async moveLeft() {
-    this.vel.x = -this.groundSpeed;
-    await this._wait(700)
+    if (!this.isJumping) {
+      this.vel.x = -this.groundSpeed;
+      await this._wait(700)
+    } else {
+      console.log('here')
+      await this._wait(50)
+      await this.moveLeft()
+    }
   }
 
   async jumpRight() {
@@ -73,7 +82,7 @@ export default class Player {
     this.jumpDistance = this.position.x + this.gridSize * 3;
     this.vel.y = - this.jumpSpeed;
     this.vel.x = this.airSpeed;
-    await this._wait(800)
+    await this._wait(300) // change
   }
 
   async jumpLeft() {
@@ -81,7 +90,7 @@ export default class Player {
     this.jumpDistance = this.position.x - this.gridSize * 3;
     this.vel.y = - this.jumpSpeed;
     this.vel.x = - this.airSpeed;
-    await this._wait(800)
+    await this._wait(300) // change
   }
 
   async start(inputArray) {
