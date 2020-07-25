@@ -71,26 +71,35 @@ export default class Player {
       this.vel.x = -this.groundSpeed;
       await this._wait(700)
     } else {
-      console.log('here')
       await this._wait(50)
       await this.moveLeft()
     }
   }
 
   async jumpRight() {
-    this.isJumping = true;
-    this.jumpDistance = this.position.x + this.gridSize * 3;
-    this.vel.y = - this.jumpSpeed;
-    this.vel.x = this.airSpeed;
-    await this._wait(300) // change
+    if (!this.isJumping) {
+      this.isJumping = true;
+      this.jumpDistance = this.position.x + this.gridSize * 3;
+      this.vel.y = - this.jumpSpeed;
+      this.vel.x = this.airSpeed;
+      await this._wait(700)
+    } else {
+      await this._wait(50)
+      await this.jumpRight()
+    }
   }
 
   async jumpLeft() {
-    this.isJumping = true;
-    this.jumpDistance = this.position.x - this.gridSize * 3;
-    this.vel.y = - this.jumpSpeed;
-    this.vel.x = - this.airSpeed;
-    await this._wait(300) // change
+    if (!this.isJumping) {
+      this.isJumping = true;
+      this.jumpDistance = this.position.x - this.gridSize * 3;
+      this.vel.y = - this.jumpSpeed;
+      this.vel.x = - this.airSpeed;
+      await this._wait(700)
+    } else {
+      await this._wait(50)
+      await this.jumpLeft()
+    }
   }
 
   async start(inputArray) {

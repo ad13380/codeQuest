@@ -55,7 +55,6 @@ if (canvas !== null) {
   function gameLoop(timestamp) {
     let deltaTime = timestamp - lastTime;
     lastTime = timestamp;
-    // map.checkWin()
     map.clearMap()
     map.drawMap()
     player.update(deltaTime);
