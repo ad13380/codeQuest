@@ -5,6 +5,7 @@ export default class Collision {
     this.gridSize = gridSize;
     this.gameRows = gameRows
     this.gameColumns = gameColumns;
+    this.offSet = 0.01; // prevent rounding errors
   }
 
   detect() {
@@ -37,7 +38,7 @@ export default class Collision {
       this.player.setLeft = 0;             
       this.player.vel.x = 0; 
     } else if (this.player.getRight > this.gridSize * this.gameColumns) { 
-      this.player.setRight = this.gridSize * this.gameColumns - 0.01;   
+      this.player.setRight = this.gridSize * this.gameColumns - this.offSet;   
       this.player.vel.x = 0; 
     }
     // top bottom
@@ -45,9 +46,9 @@ export default class Collision {
       this.player.setTop = 0;             
       this.player.vel.y = 0; 
     } else if (this.player.getBottom > this.gridSize * this.gameRows) { 
-      this.player.setBottom = this.gridSize * this.gameRows - 0.01;   
+      this.player.setBottom = this.gridSize * this.gameRows - this.offSet;   
       this.player.vel.y = 0; 
-      if (this.player.isJumping) {  // added
+      if (this.player.isJumping) {  // related to player jumping mechanics
         this.player.vel.x = 0;
         this.player.isJumping = false;
       }
@@ -84,9 +85,9 @@ export default class Collision {
 
   collidePlatformTop(tile_top) { 
     if (this.player.getBottom > tile_top && this.player.getOldBottom <= tile_top) {
-      this.player.setBottom = tile_top - 0.01;
+      this.player.setBottom = tile_top - this.offSet;
       this.player.vel.y  = 0;
-      if (this.player.isJumping) {  // added
+      if (this.player.isJumping) {  // related to player jumping mechanics
         this.player.vel.x = 0;
         this.player.isJumping = false;
       }
@@ -106,7 +107,7 @@ export default class Collision {
 
   collidePlatformLeft(tile_left) {
     if (this.player.getRight > tile_left && this.player.getOldRight <= tile_left) {
-      this.player.setRight = tile_left - 0.01;
+      this.player.setRight = tile_left - this.offSet;
       this.player.vel.x = 0;
       return true;
     } 

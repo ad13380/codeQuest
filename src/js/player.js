@@ -37,6 +37,8 @@ export default class Player {
     this.gravity = 0.7; // do not change
     // target x-position of jump
     this.jumpDestination = null;
+    // x-position offset (this is just to fix rouding errors)
+    this.offSet = 0.01;
   }
 
   draw(ctx) {
@@ -114,7 +116,6 @@ export default class Player {
   _updatePosition() {
     this.oldPosition.x = this.position.x;
     this.oldPosition.y = this.position.y;
-    console.log('here')
     this.position.x += this.vel.x;
     this.position.y += this.vel.y;
   }
@@ -141,7 +142,7 @@ export default class Player {
   }
 
   _addOffset(sign) {
-    this.position.x += 0.01 * sign
+    this.position.x += this.offSet * sign
   }
 
   // collision methods
