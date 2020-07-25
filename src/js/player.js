@@ -65,7 +65,6 @@ export default class Player {
 
   async moveLeft() {
     this.vel.x = -this.groundSpeed;
-    this._addOffset(-1)
     await this._wait(700)
   }
 
