@@ -47,8 +47,6 @@ export default class Player {
   update(deltaTime) {
     if (!deltaTime) return
 
-    console.log(this.position.x)
-
     this._updatePosition()
     this._limitJumpDistance()
     this._applyFriction()
@@ -116,6 +114,7 @@ export default class Player {
   _updatePosition() {
     this.oldPosition.x = this.position.x;
     this.oldPosition.y = this.position.y;
+    console.log('here')
     this.position.x += this.vel.x;
     this.position.y += this.vel.y;
   }
@@ -142,7 +141,7 @@ export default class Player {
   }
 
   _addOffset(sign) {
-    this.position.x += 0.05 * sign
+    this.position.x += 0.01 * sign
   }
 
   // collision methods
