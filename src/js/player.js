@@ -23,19 +23,20 @@ export default class Player {
       x: 0,
       y: 0,
     };
-    //movement value
-    this.moveIncrement = {
-      x: this.gridSize, 
-      y: 0
-    };
-    // speed
-    this.speed = 10;
-    // jump speed
-    this.jumpSpeed = 8;
-    // friction
-    this.friction = 1 - this.speed / this.moveIncrement.x;
+    // ground speed (horizontal speed while on ground)
+    this.groundSpeed = 8;
+    // air speed (horizontal speed while jumping)
+    this.airSpeed = 3; // do not change
+    // jump speed (vertical speed while jumping)
+    this.jumpSpeed = 10; // do not change
+    // jumping?
+    this.isJumping = false;
+    // ground friction (horizontal friction while on ground)
+    this.groundFriction = 1 - this.groundSpeed / this.gridSize;
     // gravity
-    this.gravity = 0.5;
+    this.gravity = 0.7; // do not change
+    // target x-position of jump
+    this.jumpDestination = null;
   }
 
   draw(ctx) {
@@ -47,36 +48,37 @@ export default class Player {
     if (!deltaTime) return
 
     this._updatePosition()
+    this._limitJumpDistance()
     this._applyFriction()
     this._applyGravity()
   }
 
   async moveRight() {
-    this.vel.x = this.speed;
-    await this._wait(1000)
+    this.vel.x = this.groundSpeed;
+    this._addOffset(1)
+    await this._wait(700)
   }
 
   async moveLeft() {
-    this.vel.x = -this.speed;
-    await this._wait(1000)
+    this.vel.x = -this.groundSpeed;
+    this._addOffset(-1)
+    await this._wait(700)
   }
 
   async jumpRight() {
+    this.isJumping = true;
+    this.jumpDistance = this.position.x + this.gridSize * 2
     this.vel.y = - this.jumpSpeed;
-    this.vel.x = this.speed;
-    await this._wait(1000)
+    this.vel.x = this.airSpeed;
+    await this._wait(700)
   }
 
   async jumpLeft() {
+    this.isJumping = true;
+    this.jumpDistance = this.position.x - this.gridSize * 2
     this.vel.y = - this.jumpSpeed;
-    this.vel.x = - this.speed;
-    await this._wait(1000)
-  }
-
-  _wait(ms) {
-    return new Promise(
-      resolve => setTimeout(resolve, ms)
-    );
+    this.vel.x = - this.airSpeed;
+    await this._wait(700)
   }
 
   async start(inputArray) {
@@ -103,6 +105,12 @@ export default class Player {
     }
   }
 
+  _wait(ms) {
+    return new Promise(
+      resolve => setTimeout(resolve, ms)
+    );
+  }
+
   // only for X axis 
   _updatePosition() {
     // update px position
@@ -113,11 +121,28 @@ export default class Player {
   }
 
   _applyFriction() {
-    this.vel.x *= this.friction;
+    if (!this.isJumping) {
+      this.vel.x *= this.groundFriction;
+    }
   }
 
   _applyGravity() {
     this.vel.y += this.gravity;
+  }
+
+  _limitJumpDistance() {
+    if (this.isJumping) {
+      if (this.position.x > this.oldPosition.x && this.position.x >= this.jumpDistance) {
+        this.vel.x = 0;
+      }
+      if (this.position.x < this.oldPosition.x && this.position.x <= this.jumpDistance) {
+        this.vel.x = 0;
+      }
+    }
+  }
+
+  _addOffset(sign) {
+    this.position.x += 0.05 * sign
   }
 
   // collision methods
