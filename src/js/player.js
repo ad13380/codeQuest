@@ -28,7 +28,7 @@ export default class Player {
     // air speed (horizontal speed while jumping)
     this.airSpeed = 3; // do not change
     // jump speed (vertical speed while jumping)
-    this.jumpSpeed = 10; // do not change
+    this.jumpSpeed = 12; // do not change
     // jumping?
     this.isJumping = false;
     // ground friction (horizontal friction while on ground)
@@ -46,6 +46,8 @@ export default class Player {
 
   update(deltaTime) {
     if (!deltaTime) return
+
+    console.log(this.position.x)
 
     this._updatePosition()
     this._limitJumpDistance()
@@ -67,18 +69,18 @@ export default class Player {
 
   async jumpRight() {
     this.isJumping = true;
-    this.jumpDistance = this.position.x + this.gridSize * 2
+    this.jumpDistance = this.position.x + this.gridSize * 3;
     this.vel.y = - this.jumpSpeed;
     this.vel.x = this.airSpeed;
-    await this._wait(700)
+    await this._wait(800)
   }
 
   async jumpLeft() {
     this.isJumping = true;
-    this.jumpDistance = this.position.x - this.gridSize * 2
+    this.jumpDistance = this.position.x - this.gridSize * 3;
     this.vel.y = - this.jumpSpeed;
     this.vel.x = - this.airSpeed;
-    await this._wait(700)
+    await this._wait(800)
   }
 
   async start(inputArray) {
@@ -111,9 +113,7 @@ export default class Player {
     );
   }
 
-  // only for X axis 
   _updatePosition() {
-    // update px position
     this.oldPosition.x = this.position.x;
     this.oldPosition.y = this.position.y;
     this.position.x += this.vel.x;
