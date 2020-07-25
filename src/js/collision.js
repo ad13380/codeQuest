@@ -47,7 +47,10 @@ export default class Collision {
     } else if (this.player.getBottom > this.gridSize * this.gameRows) { 
       this.player.setBottom = this.gridSize * this.gameRows - 0.01;   
       this.player.vel.y = 0; 
-      this.player.isJumping = false; // added
+      if (this.player.isJumping) {  // added
+        this.player.vel.x = 0;
+        this.player.isJumping = false;
+      }
     }
   }
 
@@ -83,7 +86,10 @@ export default class Collision {
     if (this.player.getBottom > tile_top && this.player.getOldBottom <= tile_top) {
       this.player.setBottom = tile_top - 0.01;
       this.player.vel.y  = 0;
-      this.player.isJumping = false; // added
+      if (this.player.isJumping) {  // added
+        this.player.vel.x = 0;
+        this.player.isJumping = false;
+      }
       return true;
     } 
     return false;
