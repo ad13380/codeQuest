@@ -8,6 +8,11 @@ test("renders canvas", () => {
   expect(canvas).toBeInTheDocument();
 });
 
+test("renders text area", () => {
+  const { getByTestId } = render(<Canvas />);
+  const textarea = getByTestId('testtextarea');
+  expect(textarea).toBeInTheDocument();
+});
 
 
 
