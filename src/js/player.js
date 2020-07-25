@@ -2,40 +2,43 @@ export default class Player {
   constructor(gameRows, gameColumns, gridSize) {
     // grid size
     this.gridSize = gridSize;
-    // game area size
-    this.gameHeight = this.gridSize * gameRows;
-    this.gameWidth = this.gridSize * gameColumns;
+    // game size
+    this.gameRows = gameRows;
+    this.gameColumns = gameColumns;
     // player size
     this.height = this.gridSize;
     this.width = this.gridSize;
-    // player position (px)
+    // player position
     this.position = {
       x: 0,
-      y: this.gameHeight - this.height - 3 * this.gridSize,
+      y: this.gridSize * this.gameRows - this.height - 3 * this.gridSize,
     };
-    // player position (tile)
-    this.tilePosition = {
-      x: Math.round(this.position.x / this.gridSize),
-      y: Math.ceil(this.position.y / this.gridSize)
-    }
+    // old player position
+    this.oldPosition = {
+      x: this.position.x,
+      y: this.position.y,
+    };
     // player velocity
     this.vel = {
       x: 0,
       y: 0,
     };
-    //movement value
-    this.moveIncrement = {
-      x: this.gridSize, 
-      y: 0
-    };
-    // speed
-    this.speed = 10;
-    // jump speed
-    this.jumpSpeed = 8;
-    // friction
-    this.friction = 1 - this.speed / this.moveIncrement.x;
+    // ground speed (horizontal speed while on ground)
+    this.groundSpeed = 8;
+    // air speed (horizontal speed while jumping)
+    this.airSpeed = 3; // do not change
+    // jump speed (vertical speed while jumping)
+    this.jumpSpeed = 12; // do not change
+    // jumping?
+    this.isJumping = false;
+    // ground friction (horizontal friction while on ground)
+    this.groundFriction = 1 - this.groundSpeed / this.gridSize;
     // gravity
-    this.gravity = 0.5;
+    this.gravity = 0.7; // do not change
+    // target x-position of jump
+    this.jumpDestination = null;
+    // x-position offset (this is just to fix rouding errors)
+    this.offSet = 0.01;
   }
 
   draw(ctx) {
@@ -47,30 +50,37 @@ export default class Player {
     if (!deltaTime) return
 
     this._updatePosition()
+    this._limitJumpDistance()
     this._applyFriction()
     this._applyGravity()
   }
 
   async moveRight() {
-    this.vel.x = this.speed;
-    await this._wait(1000)
+    this.vel.x = this.groundSpeed;
+    this._addOffset(1)
+    await this._wait(700)
   }
 
   async moveLeft() {
-    this.vel.x = -this.speed;
-    await this._wait(1000)
+    this.vel.x = -this.groundSpeed;
+    this._addOffset(-1)
+    await this._wait(700)
   }
 
   async jumpRight() {
-    this.vel.y -= this.jumpSpeed;
-    this.vel.x = this.speed;
-    await this._wait(1000)
+    this.isJumping = true;
+    this.jumpDistance = this.position.x + this.gridSize * 3;
+    this.vel.y = - this.jumpSpeed;
+    this.vel.x = this.airSpeed;
+    await this._wait(800)
   }
 
-  _wait(ms) {
-    return new Promise(
-      resolve => setTimeout(resolve, ms)
-    );
+  async jumpLeft() {
+    this.isJumping = true;
+    this.jumpDistance = this.position.x - this.gridSize * 3;
+    this.vel.y = - this.jumpSpeed;
+    this.vel.x = - this.airSpeed;
+    await this._wait(800)
   }
 
   async start(inputArray) {
@@ -97,21 +107,55 @@ export default class Player {
     }
   }
 
-  // only for X axis 
+  _wait(ms) {
+    return new Promise(
+      resolve => setTimeout(resolve, ms)
+    );
+  }
+
   _updatePosition() {
-    // update px position
+    this.oldPosition.x = this.position.x;
+    this.oldPosition.y = this.position.y;
     this.position.x += this.vel.x;
     this.position.y += this.vel.y;
-    // update tile position
-    this.tilePosition.x = Math.round(this.position.x / this.gridSize)
-    this.tilePosition.y = Math.ceil(this.position.y / this.gridSize)
   }
 
   _applyFriction() {
-    this.vel.x *= this.friction;
+    if (!this.isJumping) {
+      this.vel.x *= this.groundFriction;
+    }
   }
 
   _applyGravity() {
     this.vel.y += this.gravity;
   }
+
+  _limitJumpDistance() {
+    if (this.isJumping) {
+      if (this.position.x > this.oldPosition.x && this.position.x >= this.jumpDistance) {
+        this.vel.x = 0;
+      }
+      if (this.position.x < this.oldPosition.x && this.position.x <= this.jumpDistance) {
+        this.vel.x = 0;
+      }
+    }
+  }
+
+  _addOffset(sign) {
+    this.position.x += this.offSet * sign
+  }
+
+  // collision methods
+  get getBottom()     { return this.position.y + this.height;    }
+  get getTop()        { return this.position.y;                  }
+  get getLeft()       { return this.position.x;                  }
+  get getRight()      { return this.position.x + this.width;     }
+  get getOldBottom()  { return this.oldPosition.y + this.height; }
+  get getOldTop()     { return this.oldPosition.y;               }
+  get getOldLeft()    { return this.oldPosition.x;               }
+  get getOldRight()   { return this.oldPosition.x + this.width;  }
+  set setBottom(y)    { this.position.y = y - this.height;       }
+  set setTop(y)       { this.position.y = y;                     }
+  set setLeft(x)      { this.position.x = x;                     }
+  set setRight(x)     { this.position.x = x - this.width;        }
 }

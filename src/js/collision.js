@@ -5,42 +5,121 @@ export default class Collision {
     this.gridSize = gridSize;
     this.gameRows = gameRows
     this.gameColumns = gameColumns;
+    this.offSet = 0.01; // prevent rounding errors
   }
 
   detect() {
-    let value_at_index = this.gridMap[this.player.tilePosition.y * this.gameColumns + this.player.tilePosition.x]
-    this._collisionObject[value_at_index]()
+    this.checkBoundaryCollision();
+    this.checkTopLeftCorner();
+    this.checkTopRightCorner();
+    this.checkBottomLeftCorner();
+    this.checkBottomRightCorner();
   }
 
-  leftCollision() {
-    let leftSide = this.player.tilePosition.x * this.gridSize;
-    if (this.player.vel.x > 0) { // moving right
-      this.player.position.x = leftSide - this.gridSize * 0.5;
-      this._pushBack(- this.gridSize * 0.5)
-      return true;
+  gridCollisionType(value, tile_x, tile_y) {
+    // eslint-disable-next-line default-case
+    switch(value) {
+      case 0: break;
+      case 1: this.collidePlatformTop(tile_y); break;
+      case 2: this.allSidesCollision(tile_x, tile_y); break;
     }
+  }
+
+  allSidesCollision(tile_x, tile_y) {
+    if (this.collidePlatformTop(tile_y)) return; 
+    if (this.collidePlatformBottom(tile_y + this.gridSize)) return;
+    if (this.collidePlatformLeft(tile_x)) return;
+    this.collidePlatformRight(tile_x + this.gridSize); 
+  }
+
+  checkBoundaryCollision() {
+    // left right
+    if (this.player.getLeft < 0) { 
+      this.player.setLeft = 0;             
+      this.player.vel.x = 0; 
+    } else if (this.player.getRight > this.gridSize * this.gameColumns) { 
+      this.player.setRight = this.gridSize * this.gameColumns - this.offSet;   
+      this.player.vel.x = 0; 
+    }
+    // top bottom
+    if (this.player.getTop < 0) { 
+      this.player.setTop = 0;             
+      this.player.vel.y = 0; 
+    } else if (this.player.getBottom > this.gridSize * this.gameRows) { 
+      this.player.setBottom = this.gridSize * this.gameRows - this.offSet;   
+      this.player.vel.y = 0; 
+      if (this.player.isJumping) {  // related to player jumping mechanics
+        this.player.vel.x = 0;
+        this.player.isJumping = false;
+      }
+    }
+  }
+
+  checkTopLeftCorner() {
+    let top = Math.floor(this.player.getTop / this.gridSize);
+    let left = Math.floor(this.player.getLeft / this.gridSize);
+    let value  = this.gridMap[top * this.gameColumns + left];
+    this.gridCollisionType(value, left * this.gridSize, top * this.gridSize);
+  }
+
+  checkTopRightCorner() {
+    let top = Math.floor(this.player.getTop / this.gridSize);
+    let right = Math.floor(this.player.getRight / this.gridSize);
+    let value  = this.gridMap[top * this.gameColumns + right];
+    this.gridCollisionType(value, right * this.gridSize, top * this.gridSize);
+  }
+
+  checkBottomLeftCorner() {
+    let bottom = Math.floor(this.player.getBottom / this.gridSize);
+    let left = Math.floor(this.player.getLeft / this.gridSize);
+    let value  = this.gridMap[bottom * this.gameColumns + left];
+    this.gridCollisionType(value, left * this.gridSize, bottom * this.gridSize);
+  }
+
+  checkBottomRightCorner() {
+    let bottom = Math.floor(this.player.getBottom / this.gridSize);
+    let right = Math.floor(this.player.getRight / this.gridSize);
+    let value  = this.gridMap[bottom * this.gameColumns + right];
+    this.gridCollisionType(value, right * this.gridSize, bottom * this.gridSize);
+  }
+
+  collidePlatformTop(tile_top) { 
+    if (this.player.getBottom > tile_top && this.player.getOldBottom <= tile_top) {
+      this.player.setBottom = tile_top - this.offSet;
+      this.player.vel.y  = 0;
+      if (this.player.isJumping) {  // related to player jumping mechanics
+        this.player.vel.x = 0;
+        this.player.isJumping = false;
+      }
+      return true;
+    } 
     return false;
   }
 
-  topCollision() {
-    let topSide = this.player.tilePosition.y * this.gridSize;
-    if (this.player.vel.y > 0) { // moving down
-      this.player.vel.y = 0;
-      this.player.position.y = topSide - this.player.height;
+  collidePlatformBottom(tile_bottom) {
+    if (this.player.getTop < tile_bottom && this.player.getOldTop >= tile_bottom) {
+      this.player.setTop = tile_bottom;
+      this.player.vel.y  = 0;
       return true;
-    }
+    } 
     return false;
   }
 
-  get _collisionObject() {
-    return {
-      0: () => {},
-      1: () => { this.topCollision(); },
-      2: () => { this.leftCollision(); }
-    }
+  collidePlatformLeft(tile_left) {
+    if (this.player.getRight > tile_left && this.player.getOldRight <= tile_left) {
+      this.player.setRight = tile_left - this.offSet;
+      this.player.vel.x = 0;
+      return true;
+    } 
+    return false;
   }
 
-  _pushBack(increment) {
-    this.player.vel.x = increment * (1 - this.player.friction);
+  collidePlatformRight(tile_right) {
+    if (this.player.getLeft < tile_right && this.player.getOldLeft >= tile_right) {
+      this.player.setLeft = tile_right;
+      this.player.vel.x = 0;
+      return true;
+    } 
+    return false;
   }
 }
