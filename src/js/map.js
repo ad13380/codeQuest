@@ -7,6 +7,7 @@ export default class Map {
     this.GAME_ROWS = gameRows;
     this.GAME_COLUMNS = gameColumns;
     this.winningTile = winningTile;
+    this.gameOver = false
   }
 
   isWithinX() {
@@ -22,15 +23,18 @@ export default class Map {
     }
   }
 
-  // checkWin() {
-  //   let xCheck = this.winningTile.x === Math.floor(this.player.position.x / this.GRID_SIZE);
-  //   let yCheck = this.winningTile.y === Math.floor(this.player.position.y / this.GRID_SIZE);
-  //   let playerVel = this.player.vel.x === 0 && this.player.vel.y === 0
-  //   if (xCheck && yCheck && playerVel) alert('Win')
-  // }
+  checkWin() {
+    let xCheck = this.winningTile.x === Math.floor(this.player.position.x / this.GRID_SIZE);
+    let yCheck = this.winningTile.y === Math.floor(this.player.position.y / this.GRID_SIZE);
+    if (xCheck && yCheck) this.gameOver = true
+  }
 
   clearMap() {
     this.ctx.clearRect(0, 0, this.gridSize * this.GAME_COLUMNS, this.gridSize * this.GAME_ROWS);
+  }
+
+  isLevelOver() {
+    return this.gameOver
   }
 
   _selectGridStyle(index) {
