@@ -23,7 +23,7 @@ describe("Player", () => {
   test("player can move to the left", () => {
     player.moveLeft()
     player.update(0.1)
-    expect(player.position.x).toEqual(initial_position.x - player.groundSpeed - player.offSet)
+    expect(player.position.x).toEqual(initial_position.x - player.groundSpeed)
   })
 
   test("player can jump to the right", () => {
@@ -31,6 +31,16 @@ describe("Player", () => {
     player.update(0.1)
     expect(player.position.x).toEqual(initial_position.x + player.airSpeed)
     expect(player.position.y).toEqual(initial_position.y - player.jumpSpeed)
+  })
+
+  test("jump distance target is set jumpRight()", () => {
+    player.jumpRight()
+    expect(player.jumpDistance).toEqual(initial_position.x + 3 * 30)
+  })
+
+  test("jump distance target is set jumpLeft()", () => {
+    player.jumpLeft()
+    expect(player.jumpDistance).toEqual(initial_position.x - 3 * 30)
   })
 
   test("player can jump to the left", () => {
@@ -49,7 +59,7 @@ describe("Player", () => {
   test("player starts moving when passed a command to moveLeft()", () => {
     player.start(['player.moveLeft()'])
     player.update(0.1)
-    expect(player.position.x).toEqual(initial_position.x - player.groundSpeed - player.offSet)
+    expect(player.position.x).toEqual(initial_position.x - player.groundSpeed)
   })
 
   test("player starts moving when passed a command to jumpRight()", () => {

@@ -24,7 +24,7 @@ export default class Player {
       y: 0,
     };
     // ground speed (horizontal speed while on ground)
-    this.groundSpeed = 8;
+    this.groundSpeed = 5;
     // air speed (horizontal speed while jumping)
     this.airSpeed = 3; // do not change
     // jump speed (vertical speed while jumping)
@@ -56,31 +56,50 @@ export default class Player {
   }
 
   async moveRight() {
-    this.vel.x = this.groundSpeed;
-    this._addOffset(1)
-    await this._wait(700)
+    if (!this.isJumping) {
+      this.vel.x = this.groundSpeed;
+      this._addOffset(1)
+      await this._wait(700) // change back
+    } else {
+      await this._wait(50)
+      await this.moveRight()
+    }
   }
 
   async moveLeft() {
-    this.vel.x = -this.groundSpeed;
-    this._addOffset(-1)
-    await this._wait(700)
+    if (!this.isJumping) {
+      this.vel.x = -this.groundSpeed;
+      await this._wait(700)
+    } else {
+      await this._wait(50)
+      await this.moveLeft()
+    }
   }
 
   async jumpRight() {
-    this.isJumping = true;
-    this.jumpDistance = this.position.x + this.gridSize * 3;
-    this.vel.y = - this.jumpSpeed;
-    this.vel.x = this.airSpeed;
-    await this._wait(800)
+    if (!this.isJumping) {
+      this.isJumping = true;
+      this.jumpDistance = this.position.x + this.gridSize * 3;
+      this.vel.y = - this.jumpSpeed;
+      this.vel.x = this.airSpeed;
+      await this._wait(700)
+    } else {
+      await this._wait(50)
+      await this.jumpRight()
+    }
   }
 
   async jumpLeft() {
-    this.isJumping = true;
-    this.jumpDistance = this.position.x - this.gridSize * 3;
-    this.vel.y = - this.jumpSpeed;
-    this.vel.x = - this.airSpeed;
-    await this._wait(800)
+    if (!this.isJumping) {
+      this.isJumping = true;
+      this.jumpDistance = this.position.x - this.gridSize * 3;
+      this.vel.y = - this.jumpSpeed;
+      this.vel.x = - this.airSpeed;
+      await this._wait(700)
+    } else {
+      await this._wait(50)
+      await this.jumpLeft()
+    }
   }
 
   async start(inputArray) {
