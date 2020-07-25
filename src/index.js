@@ -55,7 +55,7 @@ if (canvas !== null) {
     i++
   }
   function startGame() {
-    player = new Player(GAME_ROWS, GAME_COLUMNS, GRID_SIZE)
+    player = new Player(GAME_ROWS, GAME_COLUMNS, GRID_SIZE, i)
     input = new Input(player)
     map = new Map(player, ctx, levels[i].map, GRID_SIZE, GAME_ROWS, GAME_COLUMNS, levels[i].winningTile)
     collision = new Collision(player, levels[i].map, GRID_SIZE, GAME_ROWS, GAME_COLUMNS)
@@ -71,6 +71,7 @@ if (canvas !== null) {
   function gameLoop(timestamp) {
     let deltaTime = timestamp - lastTime;
     lastTime = timestamp;
+    input.listenForPlay()
     // map.checkWin()
     map.clearMap()
     map.drawMap()
@@ -91,5 +92,4 @@ if (canvas !== null) {
   startGame()
 
   // event listeners
-  input.listenForPlay()
 }
