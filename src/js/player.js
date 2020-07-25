@@ -24,7 +24,7 @@ export default class Player {
       y: 0,
     };
     // ground speed (horizontal speed while on ground)
-    this.groundSpeed = 8;
+    this.groundSpeed = 5;
     // air speed (horizontal speed while jumping)
     this.airSpeed = 3; // do not change
     // jump speed (vertical speed while jumping)
@@ -48,6 +48,8 @@ export default class Player {
 
   update(deltaTime) {
     if (!deltaTime) return
+
+    console.log(this.position.x)
 
     this._updatePosition()
     this._limitJumpDistance()
