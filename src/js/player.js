@@ -12,7 +12,7 @@ export default class Player {
     // player position (px)
     this.position = {
       x: 0,
-      y: this.gameHeight - this.SCALED_HEIGHT,
+      y: this.gameHeight - this.gridSize,
     };
     // player position (tile)
     this.tilePosition = {
@@ -26,11 +26,11 @@ export default class Player {
     };
     //movement value
     this.moveIncrement = {
-      x: 30,
-      y: 30,
+      x: 10,
+      y: 10,
     };
     // speed
-    this.speed = 30;
+    this.speed = 10;
     // friction
     this.friction = 1 - this.speed / this.moveIncrement.x;
   }
@@ -61,14 +61,14 @@ export default class Player {
     this.frameY = 11
     this.vel.x = this.speed;
     this.animateSprite()
-    await this._wait(1000)
+    await this._wait(200)
   }
 
   async moveLeft() {
     this.frameY = 9
     this.vel.x = -this.speed;
     this.animateSprite()
-    await this._wait(1000)
+    await this._wait(200)
    
   }
 
@@ -108,7 +108,7 @@ export default class Player {
   }
 
   _setSize(){
-    this.SCALE = 3;
+    this.SCALE = 0.46875;
     this.WIDTH = 64;
     this.HEIGHT = 64;
     this.SCALED_WIDTH = this.SCALE * this.WIDTH;
