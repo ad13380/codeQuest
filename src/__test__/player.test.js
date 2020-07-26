@@ -48,7 +48,7 @@ describe("Player", () => {
   test("player is drawn on canvas", () => {
     let ctx = {
       fillStyle: '',
-      fillRect:  function () { return 'changed' }
+      drawImage:  function () { return 'changed' }
     }
     expect(player.draw(ctx)).toEqual('changed')
   })
