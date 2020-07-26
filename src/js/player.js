@@ -12,7 +12,7 @@ export default class Player {
     // player position (px)
     this.position = {
       x: 0,
-      y: this.gameHeight - this.gridSize,
+      y: this.gameHeight - this.SCALED_HEIGHT,
     };
     // player position (tile)
     this.tilePosition = {
@@ -30,7 +30,7 @@ export default class Player {
       y: 30,
     };
     // speed
-    this.speed = 10;
+    this.speed = 30;
     // friction
     this.friction = 1 - this.speed / this.moveIncrement.x;
   }
@@ -58,13 +58,18 @@ export default class Player {
 
 
   async moveRight() {
+    this.frameY = 11
     this.vel.x = this.speed;
+    this.animateSprite()
     await this._wait(1000)
   }
 
   async moveLeft() {
+    this.frameY = 9
     this.vel.x = -this.speed;
+    this.animateSprite()
     await this._wait(1000)
+   
   }
 
   _wait(ms) {
@@ -91,18 +96,25 @@ export default class Player {
     }
   }
 
+  animateSprite(){
+       this.frameX = this.CYCLE_LOOP[this.increment.toFixed(0)]
+       this.increment > 4 ? (this.increment = 0) : (this.increment += 1)
+   }
+ 
+
   _setImage(){
     this.image = new Image();
     this.image.src = "./assets/warrior.png"
   }
 
   _setSize(){
-    this.SCALE = 0.46875;
+    this.SCALE = 3;
     this.WIDTH = 64;
     this.HEIGHT = 64;
     this.SCALED_WIDTH = this.SCALE * this.WIDTH;
     this.SCALED_HEIGHT = this.SCALE * this.HEIGHT;
   }
+  // 0.46875
 
   // _setSides(){
   //   this.top    = this.position.y
@@ -112,8 +124,8 @@ export default class Player {
   // }
 
   _setFrames(){
-    //this.CYCLE_LOOP = [0, 1, 0, 2];
-    //this.increment = 0
+    this.CYCLE_LOOP = [1, 2, 3, 4, 5, 6];
+    this.increment = 0
     this.frameX = 0;
     this.frameY = 11;
     //this.score = 0;
