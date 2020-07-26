@@ -56,10 +56,10 @@ export default class Player {
   }
 
   async moveRight() {
-    if (!this.isJumping) {
+    if (!this.isJumping && Math.abs(this.vel.x) < 0.01 && Math.abs(this.vel.y) < 0.01) {
       this.vel.x = this.groundSpeed;
       this._addOffset(1)
-      await this._wait(700) // change back
+      await this._wait(50) 
     } else {
       await this._wait(50)
       await this.moveRight()
@@ -67,9 +67,9 @@ export default class Player {
   }
 
   async moveLeft() {
-    if (!this.isJumping) {
+    if (!this.isJumping && Math.abs(this.vel.x) < 0.01 && Math.abs(this.vel.y) < 0.01) {
       this.vel.x = -this.groundSpeed;
-      await this._wait(700)
+      await this._wait(50)
     } else {
       await this._wait(50)
       await this.moveLeft()
@@ -77,12 +77,12 @@ export default class Player {
   }
 
   async jumpRight() {
-    if (!this.isJumping) {
+    if (!this.isJumping && Math.abs(this.vel.x) < 0.01 && Math.abs(this.vel.y) < 0.01) {
       this.isJumping = true;
       this.jumpDistance = this.position.x + this.gridSize * 3;
       this.vel.y = - this.jumpSpeed;
       this.vel.x = this.airSpeed;
-      await this._wait(700)
+      await this._wait(50)
     } else {
       await this._wait(50)
       await this.jumpRight()
@@ -90,12 +90,12 @@ export default class Player {
   }
 
   async jumpLeft() {
-    if (!this.isJumping) {
+    if (!this.isJumping && Math.abs(this.vel.x) < 0.01 && Math.abs(this.vel.y) < 0.01) {
       this.isJumping = true;
       this.jumpDistance = this.position.x - this.gridSize * 3;
       this.vel.y = - this.jumpSpeed;
       this.vel.x = - this.airSpeed;
-      await this._wait(700)
+      await this._wait(50)
     } else {
       await this._wait(50)
       await this.jumpLeft()
