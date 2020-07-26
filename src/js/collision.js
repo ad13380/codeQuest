@@ -5,7 +5,7 @@ export default class Collision {
     this.gridSize = gridSize;
     this.gameRows = gameRows
     this.gameColumns = gameColumns;
-    this.offSet = 0.01; // prevent rounding errors
+    this.offSet = 0.00033333 * this.gridSize; // prevent rounding errors
   }
 
   detect() {
