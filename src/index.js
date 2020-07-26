@@ -7,6 +7,8 @@ import Player from "./js/player";
 import Input from "./js/input";
 import Map from './js/map'
 import Collision from "./js/collision";
+import Animation from "./js/animation"
+import Frame from "./js/frame"
 import levels from './levels'
 
 
@@ -26,6 +28,8 @@ let player;
 let map;
 let collision;
 let input;
+let animation;
+let frameClass;
 
 //canvas
 let canvas = document.getElementById("gameArea");
@@ -38,7 +42,11 @@ if (canvas !== null) {
     i++
   }
   function startGame() {
-    player = new Player(GAME_ROWS, GAME_COLUMNS, GRID_SIZE)
+    // frameClass = Frame;
+    // animation = new Animation(null, frameClass)
+    player = new Player(GAME_ROWS, GAME_COLUMNS, GRID_SIZE, animation)
+    frameClass = Frame;
+    animation = new Animation(player, frameClass)
     input = new Input(player)
     map = new Map(player, ctx, levels[i].map, GRID_SIZE, GAME_ROWS, GAME_COLUMNS, levels[i].winningTile)
     collision = new Collision(player, levels[i].map, GRID_SIZE, GAME_ROWS, GAME_COLUMNS)
@@ -60,6 +68,9 @@ if (canvas !== null) {
     player.update(deltaTime);
     collision.detect()
     player.draw(ctx);
+
+    animation.update()
+
     map.checkWin()
     if (!map.isLevelOver()) {
       requestAnimationFrame(gameLoop)

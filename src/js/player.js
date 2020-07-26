@@ -23,6 +23,8 @@ export default class Player {
       x: 0,
       y: 0,
     };
+    // player direction (this is used for animation)
+    this.x_direction = 1 // 1 => right, -1 => left
     // ground speed (horizontal speed while on ground)
     this.groundSpeed = 0.166666 * this.gridSize;
     // air speed (horizontal speed while jumping)
@@ -38,20 +40,31 @@ export default class Player {
     // target x-position of jump
     this.jumpDestination = null;
     // x-position offset (this is just to fix rouding errors)
-    this.offSet = 0.00033333 * this.gridSize;
+    this.offSet = 0.0004 * this.gridSize;
     // velocity threshold
     this.thresh = 0.00033333 * this.gridSize;
   }
 
   draw(ctx) {
+    // let source_x = (0 % this.animation.playerSheetColumns) * this.animation.playerTileSize
+    // let source_y = Math.floor(0 / this.animation.playerSheetColumns) * this.animation.playerTileSize
+
+    // return ctx.drawImage(this.animation.playerSheetImage,
+    //   source_x,
+    //   source_y,
+    //   this.animation.playerTileSize, // the cut out
+    //   this.animation.playerTileSize,
+    //   this.position.x, 
+    //   this.position.y, 
+    //   this.width * 1.5, // what's drawn
+    //   this.height * 1.5)
+
     ctx.fillStyle = 'black'
     return ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
 
   update(deltaTime) {
     if (!deltaTime) return
-
-    console.log(this.position.x)
 
     this._updatePosition()
     this._limitJumpDistance()
@@ -63,6 +76,7 @@ export default class Player {
     if (!this.isJumping && Math.abs(this.vel.x) < this.thresh && Math.abs(this.vel.y) < this.thresh) {
       this.vel.x = this.groundSpeed;
       this._addOffset(1)
+      this.x_direction = 1;
       await this._wait(50) 
     } else {
       await this._wait(50)
@@ -73,6 +87,7 @@ export default class Player {
   async moveLeft() {
     if (!this.isJumping && Math.abs(this.vel.x) < this.thresh && Math.abs(this.vel.y) < this.thresh) {
       this.vel.x = -this.groundSpeed;
+      this.x_direction = -1;
       await this._wait(50)
     } else {
       await this._wait(50)
@@ -86,6 +101,7 @@ export default class Player {
       this.jumpDistance = this.position.x + this.gridSize * 3;
       this.vel.y = - this.jumpSpeed;
       this.vel.x = this.airSpeed;
+      this.x_direction = 1;
       await this._wait(50)
     } else {
       await this._wait(50)
@@ -99,6 +115,7 @@ export default class Player {
       this.jumpDistance = this.position.x - this.gridSize * 3;
       this.vel.y = - this.jumpSpeed;
       this.vel.x = - this.airSpeed;
+      this.x_direction = -1;
       await this._wait(50)
     } else {
       await this._wait(50)
