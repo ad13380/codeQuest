@@ -8,6 +8,9 @@ function TextArea() {
       <button id="play" type="submit">
         Play!
       </button>
+      <button id="reset" type="submit">
+        Back to Start
+      </button>
     </div>
   );
 }
