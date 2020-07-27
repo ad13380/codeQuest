@@ -21,7 +21,7 @@ export default class Input {
 
   listenForReset() {
     this.btnReset.addEventListener("click", () => {
-      console.log('clicked')
+      this.player.resetPosition()
     });
 
   }
