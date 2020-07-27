@@ -47,9 +47,14 @@ export default class Input {
   }
 
 
-  _isInputValid(input) {
-    return this.validInputs.includes(input)
-  }
+  _isInputValid() {
+    this.inputArray.forEach((input) => {
+      if (this.validInputs.includes(input))
+        this.arrToCheckInput.push("true")
+      else { this.arrToCheckInput.push("false") }
+    })
+    return !this.arrToCheckInput.includes("false")
+  };
 
   clearTextarea() {
     let inputString = document.getElementById("userInput")
@@ -57,14 +62,5 @@ export default class Input {
   }
 }
 
-  _isInputValid(){
-      this.inputArray.forEach((input) => {
-        if (this.validInputs.includes(input))
-          this.arrToCheckInput.push("true")
-        else {this.arrToCheckInput.push("false")}
-      }) 
-      return !this.arrToCheckInput.includes("false")
-  };
 
-}
 
