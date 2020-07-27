@@ -11,18 +11,14 @@ import Animation from "./js/animation"
 import Frame from "./js/frame"
 import levels from './levels'
 
-
 ReactDOM.render(
+
   <React.StrictMode>
     <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
 
-// define game area
-const GRID_SIZE = 30;
-const GAME_ROWS = 9;
-const GAME_COLUMNS = 16;
 // define variables
 let i = 0
 let player;
@@ -31,6 +27,11 @@ let collision;
 let input;
 let animation;
 let frameClass;
+
+// define game area
+const GRID_SIZE = 30;
+const GAME_ROWS = 9;
+const GAME_COLUMNS = 16;
 
 //canvas
 let canvas = document.getElementById("gameArea");
