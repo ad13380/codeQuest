@@ -118,7 +118,7 @@ export default class Player {
     this.x_direction = 1;
     this.position = {
       x: this.gridSize,
-      y: this.gridSize * this.gameRows - this.height - 3 * this.gridSize,
+      y: this.gridSize * this.gameRows - this.height - 4 * this.gridSize,
     };
   }
   
