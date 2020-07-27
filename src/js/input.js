@@ -12,10 +12,15 @@ export default class Input {
     this.btnPlay.addEventListener("click", () => {
       let inputString = document.getElementById("userInput").value
       this._stringToArray(inputString)
-      console.log(this._isInputValid())
+      if (this._isInputValid()) {
+        this.player.start(this.inputArray);
+      } else {
+        console.log("error")
+      }
       this.arrToCheckInput = []
-      this.player.start(this.inputArray);
       this.inputArray = []
+      console.log(this.arrToCheckInput)
+      console.log(this.inputArray)
       //document.getElementById("userInput").value = ""
     });
   }
