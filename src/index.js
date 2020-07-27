@@ -20,7 +20,7 @@ ReactDOM.render(
 );
 
 // define game area
-const GRID_SIZE = 30;
+const GRID_SIZE = 70;
 const GAME_ROWS = 9;
 const GAME_COLUMNS = 16;
 let i = 0
@@ -67,9 +67,9 @@ if (canvas !== null) {
     map.drawMap()
     player.update(deltaTime);
     collision.detect()
-    player.draw(ctx);
+    //player.draw(ctx);
 
-    animation.update()
+    animation.update(ctx)
 
     map.checkWin()
     if (!map.isLevelOver()) {
