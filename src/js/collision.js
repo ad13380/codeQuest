@@ -41,11 +41,12 @@ export default class Collision {
       this.player.setRight = this.gridSize * this.gameColumns - this.offSet;   
       this.player.vel.x = 0; 
     }
-    // top bottom
-    if (this.player.getTop < 0) { 
-      this.player.setTop = 0;             
-      this.player.vel.y = 0; 
-    } else if (this.player.getBottom > this.gridSize * this.gameRows) { 
+    // top bottom (no top collision)
+    // if (this.player.getTop < 0) { 
+    //   this.player.setTop = 0;             
+    //   this.player.vel.y = 0; 
+    // } else 
+    if (this.player.getBottom > this.gridSize * this.gameRows) { 
       this.player.setBottom = this.gridSize * this.gameRows - this.offSet;   
       this.player.vel.y = 0; 
       if (this.player.isJumping) {  // related to player jumping mechanics

@@ -18,8 +18,8 @@ export default class Map {
   }
 
   checkWin() {
-    let xCheck = this.winningTile.x === Math.floor(this.player.position.x / this.GRID_SIZE);
-    let yCheck = this.winningTile.y === Math.floor(this.player.position.y / this.GRID_SIZE);
+    let xCheck = this.winningTile.x === Math.round(this.player.position.x / this.GRID_SIZE);
+    let yCheck = this.winningTile.y === Math.round(this.player.position.y / this.GRID_SIZE);
     if (xCheck && yCheck) this.gameOver = true
   }
 

@@ -30,7 +30,7 @@ let frameClass;
 
 // define game area
 const GRID_SIZE = 70;
-const GAME_ROWS = 10;
+const GAME_ROWS = 13;
 const GAME_COLUMNS = 14;
 
 //canvas
