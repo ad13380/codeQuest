@@ -2,13 +2,16 @@ import React from 'react';
 
 function Header() {
   return (
-    <div >
-      <a href="/play">Play</a>
-      <a href="/instructions">Instructions</a>
-      <a href="/aboutus">About Us</a>
+    <div>
       <div>
         <h1 className='tc'>CodeQuest()</h1>
       </div>
+      <div className='tc'>
+        <a className='link dim black f6 f5-ns dib mr3' href="/play">Play</a>
+        <a className='link dim black f6 f5-ns dib mr3' href="/instructions">Instructions</a>
+        <a className='link dim black f6 f5-ns dib mr3' href="/aboutus">About Us</a>
+      </div>
+      <br />
     </div>
   );
 }
