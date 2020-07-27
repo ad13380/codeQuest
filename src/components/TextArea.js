@@ -2,9 +2,8 @@ import React from "react";
 
 function TextArea() {
   return (
-    <div>
+    <div className='fl w-third tc pa1'>
       <div>
-        <br />
         Make sure you are using the correct commands to move our hero!<br /><br />
         hero.moveRight()<br />
         hero.moveLeft()<br />
@@ -12,7 +11,7 @@ function TextArea() {
         hero.jumpLeft()<br />
       </div>
       <br />
-      <textarea id="userInput" name="name" rows="15" cols="30"></textarea>
+      <textarea id="userInput" name="name" rows="14" cols="30"></textarea>
       <br />
       <button id="play" type="submit">
         Play!
