@@ -15,3 +15,7 @@ h1 {
 body{
   font-family: 'Eight Bit Dragon Regular'
 }
+
+#userInput {
+  resize: none;
+}
