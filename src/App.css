@@ -9,6 +9,9 @@
   src: local('Eight Bit Dragon Regular'), url('eight-bit-dragon.woff') format('woff');
   }
 
-  h1 {
-    font-family: 'Eight Bit Dragon Regular';
-  }
+h1 {
+  font-family: 'Eight Bit Dragon Regular';
+}
+body{
+  font-family: 'Eight Bit Dragon Regular'
+}
