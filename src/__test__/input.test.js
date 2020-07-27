@@ -36,10 +36,13 @@ describe("Input", () => {
   })
 
   test('_isInputValid returns true when inputs are correct', () => {
-    let correctInput = 'player.moveRight()'
-    let wrongInput = 'fail me'
-    expect(input._isInputValid(correctInput)).toEqual(true)
-    expect(input._isInputValid(wrongInput)).toEqual(false)
+    // let correctInput = 'player.moveRight()'
+    // let wrongInput = 'fail me'
+    // expect(input._isInputValid(correctInput)).toEqual(true)
+    // expect(input._isInputValid(wrongInput)).toEqual(false)
+    let correctString = ('player.moveRight()\nplayer.jumpRight()  \nplayer.jumpLeft()\nplayer.jumpRight()')
+    input._stringToArray(correctString)
+    expect(input._isInputValid()).toBe(true)
 
   })
 
