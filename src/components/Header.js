@@ -7,7 +7,7 @@ function Header() {
       <a href="/instructions">Instructions</a>
       <a href="/aboutus">About Us</a>
       <div>
-        <h1>CodeQuest()</h1>
+        <h1 className='tc'>CodeQuest()</h1>
       </div>
     </div>
   );

@@ -46,13 +46,21 @@ export default class Input {
     return input.trimStart().trimEnd()
   }
 
-  _isInputValid(){
-      this.inputArray.forEach((input) => {
-        if (this.validInputs.includes(input))
-          this.arrToCheckInput.push("true")
-        else {this.arrToCheckInput.push("false")}
-      }) 
-      return !this.arrToCheckInput.includes("false")
+
+  _isInputValid() {
+    this.inputArray.forEach((input) => {
+      if (this.validInputs.includes(input))
+        this.arrToCheckInput.push("true")
+      else { this.arrToCheckInput.push("false") }
+    })
+    return !this.arrToCheckInput.includes("false")
   };
 
+  clearTextarea() {
+    let inputString = document.getElementById("userInput")
+    inputString.value = ""
+  }
 }
+
+
+

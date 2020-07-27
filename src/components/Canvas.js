@@ -4,7 +4,7 @@ import TextArea from "./TextArea"
 function Canvas() {
   return (
     <div>
-      <canvas id="gameArea"></canvas>
+      <canvas className='fr w-50' id="gameArea"></canvas>
       <TextArea />
     </div>
   )
