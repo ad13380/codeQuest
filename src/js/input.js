@@ -13,11 +13,11 @@ export default class Input {
     this.btnPlay.addEventListener("click", () => {
       let inputString = document.getElementById("userInput").value
       this._stringToArray(inputString)
-      console.log(this.errorMessage)
       if (this._isInputValid()) {
+        this.errorMessage.innerHTML = ""
         this.player.start(this.inputArray);
       } else {
-        console.log("error")
+        this.errorMessage.innerHTML = "I am afraid there is an error in your code, please review it and press play again"
       }
       this.arrToCheckInput = []
       this.inputArray = []
