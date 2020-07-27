@@ -35,7 +35,7 @@ let frameClass;
 //canvas
 let canvas = document.getElementById("gameArea");
 if (canvas !== null) {
-  let ctx = canvas.getContext("2d");   
+  let ctx = canvas.getContext("2d");
   // increment level counter
   function nextLevel() {
     i++
@@ -77,6 +77,8 @@ if (canvas !== null) {
     } else {
       nextLevel()
       startGame()
+      //clear text area on win
+      input.clearTextarea()
     }
   }
   startGame()

@@ -32,4 +32,9 @@ export default class Input {
   _isInputValid(input) {
     return this.validInputs.includes(input)
   }
+
+  clearTextarea() {
+    let inputString = document.getElementById("userInput")
+    inputString.value = ""
+  }
 }
