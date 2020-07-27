@@ -51,6 +51,8 @@ if (canvas !== null) {
     collision = new Collision(player, levels[i].map, GRID_SIZE, GAME_ROWS, GAME_COLUMNS)
     // event listener for play button
     input.listenForPlay()
+    // event listener for reset button
+    input.listenForReset()
     // start game loop
     gameLoop()
   }

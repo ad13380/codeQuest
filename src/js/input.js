@@ -2,19 +2,36 @@ export default class Input {
   constructor(player) {
     this.player = player
     this.btnPlay = document.getElementById("play");
+    this.btnReset = document.getElementById("reset")
+    this.errorMessage = document.getElementById("ErrorMessage")
     this.validInputs = ['player.moveRight()', 'player.moveLeft()', 'player.jumpRight()', 'player.jumpLeft()']
+    this.arrToCheckInput = []
     this.inputArray = []
+    this.errorText = "I am afraid there is an error in your code, please review it and press play again"
 
   }
 
   listenForPlay() {
     this.btnPlay.addEventListener("click", () => {
+      console.log('clicked')
       let inputString = document.getElementById("userInput").value
       this._stringToArray(inputString)
-      this.player.start(this.inputArray);
+      if (this._isInputValid()) {
+        this.errorMessage.innerHTML = ""
+        this.player.start(this.inputArray);
+      } else {
+        this.errorMessage.innerHTML = this.errorText
+      }
+      this.arrToCheckInput = []
       this.inputArray = []
-      //document.getElementById("userInput").value = ""
     });
+  }
+
+  listenForReset() {
+    this.btnReset.addEventListener("click", () => {
+      this.player.resetPosition()
+    });
+
   }
 
   _stringToArray(inputString) {
@@ -29,6 +46,7 @@ export default class Input {
     return input.trimStart().trimEnd()
   }
 
+
   _isInputValid(input) {
     return this.validInputs.includes(input)
   }
@@ -38,3 +56,15 @@ export default class Input {
     inputString.value = ""
   }
 }
+
+  _isInputValid(){
+      this.inputArray.forEach((input) => {
+        if (this.validInputs.includes(input))
+          this.arrToCheckInput.push("true")
+        else {this.arrToCheckInput.push("false")}
+      }) 
+      return !this.arrToCheckInput.includes("false")
+  };
+
+}
+

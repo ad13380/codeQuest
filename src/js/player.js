@@ -116,6 +116,13 @@ export default class Player {
     }
   }
 
+  resetPosition() {
+    this.position = {
+      x: 0,
+      y: this.gridSize * this.gameRows - this.height - 3 * this.gridSize,
+    };
+  }
+  
   async _stringToFunction(input) {
     // eslint-disable-next-line default-case
     switch (input) {
