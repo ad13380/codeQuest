@@ -23,28 +23,32 @@ export default class Player {
       x: 0,
       y: 0,
     };
+    // player direction (this is used for animation)
+    this.x_direction = 1 // 1 => right, -1 => left
     // ground speed (horizontal speed while on ground)
-    this.groundSpeed = 5;
+    this.groundSpeed = 0.1 * this.gridSize;
     // air speed (horizontal speed while jumping)
-    this.airSpeed = 3; // do not change
+    this.airSpeed = 0.1 * this.gridSize; // do not change
     // jump speed (vertical speed while jumping)
-    this.jumpSpeed = 12; // do not change
+    this.jumpSpeed = 0.4 * this.gridSize; // do not change
     // jumping?
     this.isJumping = false;
     // ground friction (horizontal friction while on ground)
     this.groundFriction = 1 - this.groundSpeed / this.gridSize;
     // gravity
-    this.gravity = 0.7; // do not change
+    this.gravity = 0.023333 * this.gridSize; // do not change
     // target x-position of jump
     this.jumpDestination = null;
     // x-position offset (this is just to fix rouding errors)
-    this.offSet = 0.01;
+    this.offSet = 0.00033333 * this.gridSize; // do not change
+    // velocity threshold
+    this.thresh = 0.00033333 * this.gridSize;
   }
 
-  draw(ctx) {
-    ctx.fillStyle = 'black'
-    return ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
-  }
+  // draw(ctx) {
+  //   ctx.fillStyle = 'black'
+  //   return ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+  // }
 
   update(deltaTime) {
     if (!deltaTime) return
@@ -56,10 +60,11 @@ export default class Player {
   }
 
   async moveRight() {
-    if (!this.isJumping) {
+    if (!this.isJumping && Math.abs(this.vel.x) < this.thresh && Math.abs(this.vel.y) < this.thresh) {
       this.vel.x = this.groundSpeed;
       this._addOffset(1)
-      await this._wait(700) // change back
+      this.x_direction = 1;
+      await this._wait(50) 
     } else {
       await this._wait(50)
       await this.moveRight()
@@ -67,9 +72,10 @@ export default class Player {
   }
 
   async moveLeft() {
-    if (!this.isJumping) {
+    if (!this.isJumping && Math.abs(this.vel.x) < this.thresh && Math.abs(this.vel.y) < this.thresh) {
       this.vel.x = -this.groundSpeed;
-      await this._wait(700)
+      this.x_direction = -1;
+      await this._wait(50)
     } else {
       await this._wait(50)
       await this.moveLeft()
@@ -77,12 +83,13 @@ export default class Player {
   }
 
   async jumpRight() {
-    if (!this.isJumping) {
+    if (!this.isJumping && Math.abs(this.vel.x) < this.thresh && Math.abs(this.vel.y) < this.thresh) {
       this.isJumping = true;
       this.jumpDistance = this.position.x + this.gridSize * 3;
       this.vel.y = - this.jumpSpeed;
       this.vel.x = this.airSpeed;
-      await this._wait(700)
+      this.x_direction = 1;
+      await this._wait(50)
     } else {
       await this._wait(50)
       await this.jumpRight()
@@ -90,12 +97,13 @@ export default class Player {
   }
 
   async jumpLeft() {
-    if (!this.isJumping) {
+    if (!this.isJumping && Math.abs(this.vel.x) < this.thresh && Math.abs(this.vel.y) < this.thresh) {
       this.isJumping = true;
       this.jumpDistance = this.position.x - this.gridSize * 3;
       this.vel.y = - this.jumpSpeed;
       this.vel.x = - this.airSpeed;
-      await this._wait(700)
+      this.x_direction = -1;
+      await this._wait(50)
     } else {
       await this._wait(50)
       await this.jumpLeft()
