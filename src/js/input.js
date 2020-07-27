@@ -6,6 +6,7 @@ export default class Input {
     this.validInputs = ['player.moveRight()', 'player.moveLeft()', 'player.jumpRight()', 'player.jumpLeft()']
     this.arrToCheckInput = []
     this.inputArray = []
+    this.errorText = "I am afraid there is an error in your code, please review it and press play again"
 
   }
 
@@ -17,7 +18,7 @@ export default class Input {
         this.errorMessage.innerHTML = ""
         this.player.start(this.inputArray);
       } else {
-        this.errorMessage.innerHTML = "I am afraid there is an error in your code, please review it and press play again"
+        this.errorMessage.innerHTML = this.errorText
       }
       this.arrToCheckInput = []
       this.inputArray = []
