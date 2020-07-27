@@ -3,6 +3,7 @@ export default class Input {
     this.player = player
     this.btnPlay = document.getElementById("play");
     this.validInputs = ['player.moveRight()', 'player.moveLeft()', 'player.jumpRight()', 'player.jumpLeft()']
+    this.arrToCheckInput = []
     this.inputArray = []
 
   }
@@ -11,9 +12,8 @@ export default class Input {
     this.btnPlay.addEventListener("click", () => {
       let inputString = document.getElementById("userInput").value
       this._stringToArray(inputString)
-      console.log(this._isInputValid());
-      console.log(this.inputArray);
-      console.log(this.validInputs);
+      console.log(this._isInputValid())
+      this.arrToCheckInput = []
       this.player.start(this.inputArray);
       this.inputArray = []
       //document.getElementById("userInput").value = ""
@@ -37,7 +37,12 @@ export default class Input {
   // }
 
   _isInputValid(){
-      return this.validInputs == this.inputArray
+      this.inputArray.forEach((input) => {
+        if (this.validInputs.includes(input))
+          this.arrToCheckInput.push("true")
+        else {this.arrToCheckInput.push("false")}
+      }) 
+      return !this.arrToCheckInput.includes("false")
   };
 
 }
