@@ -3,14 +3,17 @@ import React from "react";
 function AboutUs() {
   return (
     <div className="tc">
-    <h3> About us: </h3>
+  
+    <h3> About us: </h3><br/>
+   
+   
 
+    <div id = 'container' className="flex flex-wrap justify-around">
       <div>
         <img alt='bene' src="./assets/Bene.jpeg" width="200" height="200"/>
         <p> Benedetta Arinci
         </p>
         <a href ={'https://github.com/benearinci'}>Bene's GitHub</a>
-
       </div>
 
       <div>
@@ -18,8 +21,6 @@ function AboutUs() {
         <p> Anthony Donovan
         </p>
         <a href ={'https://github.com/ad13380'}>Anthony's GitHub</a>
-
-
       </div>
 
       <div>
@@ -27,7 +28,6 @@ function AboutUs() {
         <p> Chris Cooney
         </p>
         <a href ={'https://github.com/ChrisCooney05'}>Chris' GitHub</a>
-
       </div>
 
       <div>
@@ -36,6 +36,7 @@ function AboutUs() {
         </p>
         <a href ={'https://github.com/Emanuele-20'}>Emanuele's GitHub</a>
 
+      </div>
       </div>
 
     </div>
