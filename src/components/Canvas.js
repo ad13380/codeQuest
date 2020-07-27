@@ -3,8 +3,8 @@ import TextArea from "./TextArea"
 
 function Canvas() {
   return (
-    <div>
-      <canvas className='fr w-50' id="gameArea"></canvas>
+    <div className='pa3'>
+      <canvas className='fr w-50 ' id="gameArea" data-testid='canvas'></canvas>
       <TextArea />
     </div>
   )

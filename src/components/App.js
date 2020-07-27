@@ -5,16 +5,20 @@ import Play from './Play'
 import Instructions from './Instructions'
 import AboutUs from './AboutUs'
 import { BrowserRouter as Router, Route } from "react-router-dom"
+import Home from './Home'
 // import Canvas from "./Canvas"
 
 function App() {
   return (
-    <Router>
+    <div>
       <Header />
-      <Route path="/play" exact component={Play} />
-      <Route path="/instructions" exact component={Instructions} />
-      <Route path="/aboutus" exact component={AboutUs} />
-    </Router>
+      <Router>
+        <Route path='/' exact component={Home} />
+        <Route path="/play" exact component={Play} />
+        <Route path="/instructions" exact component={Instructions} />
+        <Route path="/aboutus" exact component={AboutUs} />
+      </Router>
+    </div>
   );
 }
 

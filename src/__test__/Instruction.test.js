@@ -4,6 +4,6 @@ import Instructions from "../components/Instructions";
 
 test("renders learn react link", () => {
   const { getByText } = render(<Instructions />);
-  const linkElement = getByText(/To play CodeQuest/i);
+  const linkElement = getByText(/Instructions/i);
   expect(linkElement).toBeInTheDocument();
 });
