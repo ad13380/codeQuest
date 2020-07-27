@@ -53,8 +53,6 @@ export default class Player {
   update(deltaTime) {
     if (!deltaTime) return
 
-    console.log(this.position.x)
-
     this._updatePosition()
     this._limitJumpDistance()
     this._applyFriction()

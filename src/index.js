@@ -20,7 +20,7 @@ ReactDOM.render(
 );
 
 // define game area
-const GRID_SIZE = 70;
+const GRID_SIZE = 30;
 const GAME_ROWS = 9;
 const GAME_COLUMNS = 16;
 // define variables

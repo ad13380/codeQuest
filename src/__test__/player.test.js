@@ -76,13 +76,13 @@ describe("Player", () => {
     expect(player.position.y).toEqual(initial_position.y - player.jumpSpeed)
   })
 
-  test("player is drawn on canvas", () => {
-    let ctx = {
-      fillStyle: '',
-      fillRect:  function () { return 'changed' }
-    }
-    expect(player.draw(ctx)).toEqual('changed')
-  })
+  // test("player is drawn on canvas", () => {
+  //   let ctx = {
+  //     fillStyle: '',
+  //     fillRect:  function () { return 'changed' }
+  //   }
+  //   expect(player.draw(ctx)).toEqual('changed')
+  // })
 
   test("can get player side positions", () => {
     expect(player.getBottom).toEqual(initial_position.y + player.height)
