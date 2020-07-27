@@ -11,6 +11,9 @@ export default class Input {
     this.btnPlay.addEventListener("click", () => {
       let inputString = document.getElementById("userInput").value
       this._stringToArray(inputString)
+      console.log(this._isInputValid());
+      console.log(this.inputArray);
+      console.log(this.validInputs);
       this.player.start(this.inputArray);
       this.inputArray = []
       //document.getElementById("userInput").value = ""
@@ -29,7 +32,12 @@ export default class Input {
     return input.trimStart().trimEnd()
   }
 
-  _isInputValid(input) {
-    return this.validInputs.includes(input)
-  }
+  // _isInputValid(input) {
+  //   return this.validInputs.includes(input)
+  // }
+
+  _isInputValid(){
+      return this.validInputs == this.inputArray
+  };
+
 }
