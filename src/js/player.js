@@ -49,8 +49,6 @@ export default class Player {
   update(deltaTime) {
     if (!deltaTime) return
 
-    console.log(Math.round(this.position.x / this.gridSize))
-
     this._updatePosition()
     this._limitJumpDistance()
     this._limitMoveDistance()
