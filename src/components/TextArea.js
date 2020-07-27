@@ -6,10 +6,10 @@ function TextArea() {
       <div>
         <br />
         Make sure you are using the correct commands to move our hero!<br /><br />
-        player.moveRight()<br />
-        player.moveLeft()<br />
-        player.jumpRight()<br />
-        player.jumpLeft()<br />
+        hero.moveRight()<br />
+        hero.moveLeft()<br />
+        hero.jumpRight()<br />
+        hero.jumpLeft()<br />
       </div>
       <br />
       <textarea id="userInput" name="name" rows="15" cols="30"></textarea>
