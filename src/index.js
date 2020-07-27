@@ -23,6 +23,7 @@ ReactDOM.render(
 const GRID_SIZE = 70;
 const GAME_ROWS = 9;
 const GAME_COLUMNS = 16;
+// define variables
 let i = 0
 let player;
 let map;
@@ -34,23 +35,22 @@ let frameClass;
 //canvas
 let canvas = document.getElementById("gameArea");
 if (canvas !== null) {
-
-  let ctx = canvas.getContext("2d");
-  // instances
-
+  let ctx = canvas.getContext("2d");   
+  // increment level counter
   function nextLevel() {
     i++
   }
   function startGame() {
-    // frameClass = Frame;
-    // animation = new Animation(null, frameClass)
-    player = new Player(GAME_ROWS, GAME_COLUMNS, GRID_SIZE, animation)
+    // define objects
+    player = new Player(GAME_ROWS, GAME_COLUMNS, GRID_SIZE)
     frameClass = Frame;
     animation = new Animation(player, frameClass)
     input = new Input(player)
     map = new Map(player, ctx, levels[i].map, GRID_SIZE, GAME_ROWS, GAME_COLUMNS, levels[i].winningTile)
     collision = new Collision(player, levels[i].map, GRID_SIZE, GAME_ROWS, GAME_COLUMNS)
+    // event listener for play button
     input.listenForPlay()
+    // start game loop
     gameLoop()
   }
 
@@ -80,7 +80,4 @@ if (canvas !== null) {
     }
   }
   startGame()
-
 }
-
-
