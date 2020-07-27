@@ -13,7 +13,6 @@ export default class Input {
 
   listenForPlay() {
     this.btnPlay.addEventListener("click", () => {
-      console.log('clicked')
       let inputString = document.getElementById("userInput").value
       this._stringToArray(inputString)
       if (this._isInputValid()) {

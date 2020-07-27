@@ -14,13 +14,6 @@ export default class Animation {
     this._updateFrameSet()
     this._drawPlayer(ctx)
     this._updateFrameValue()
-
-    // this._updateFrameValue()
-
-    // update animation depending on player movement
-    // run the loop (go to the next frame in the frame set)
-
-    // draw
   }
 
   _drawPlayer(ctx) {
