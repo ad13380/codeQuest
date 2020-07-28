@@ -4,7 +4,7 @@ export default class Input {
     this.btnPlay = document.getElementById("play");
     this.btnReset = document.getElementById("reset")
     this.errorMessage = document.getElementById("ErrorMessage")
-    this.validInputs = ['player.moveRight()', 'player.moveLeft()', 'player.jumpRight()', 'player.jumpLeft()']
+    this.validInputs = ['hero.moveRight()', 'hero.moveLeft()', 'hero.jumpRight()', 'hero.jumpLeft()']
     this.arrToCheckInput = []
     this.inputArray = []
     this.errorText = "I am afraid there is an error in your code, please review it and press play again"

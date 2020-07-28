@@ -62,7 +62,7 @@ export default class Player {
       this.moveDistance = this.position.x + this.gridSize;
       this.vel.x = this.groundSpeed;
       this.x_direction = 1;
-      await this._wait(50) 
+      await this._wait(50)
     } else {
       await this._wait(50)
       await this.moveRight()
@@ -122,20 +122,20 @@ export default class Player {
       y: this.gridSize * this.gameRows - this.height - 4 * this.gridSize,
     };
   }
-  
+
   async _stringToFunction(input) {
     // eslint-disable-next-line default-case
     switch (input) {
-      case "player.moveRight()":
+      case "hero.moveRight()":
         await this.moveRight();
         break;
-      case "player.moveLeft()":
+      case "hero.moveLeft()":
         await this.moveLeft();
         break;
-      case "player.jumpRight()":
+      case "hero.jumpRight()":
         await this.jumpRight();
         break;
-      case "player.jumpLeft()":
+      case "hero.jumpLeft()":
         await this.jumpLeft();
         break;
     }
@@ -196,16 +196,16 @@ export default class Player {
   }
 
   // collision methods
-  get getBottom()     { return this.position.y + this.height;    }
-  get getTop()        { return this.position.y;                  }
-  get getLeft()       { return this.position.x;                  }
-  get getRight()      { return this.position.x + this.width;     }
-  get getOldBottom()  { return this.oldPosition.y + this.height; }
-  get getOldTop()     { return this.oldPosition.y;               }
-  get getOldLeft()    { return this.oldPosition.x;               }
-  get getOldRight()   { return this.oldPosition.x + this.width;  }
-  set setBottom(y)    { this.position.y = y - this.height;       }
-  set setTop(y)       { this.position.y = y;                     }
-  set setLeft(x)      { this.position.x = x;                     }
-  set setRight(x)     { this.position.x = x - this.width;        }
+  get getBottom() { return this.position.y + this.height; }
+  get getTop() { return this.position.y; }
+  get getLeft() { return this.position.x; }
+  get getRight() { return this.position.x + this.width; }
+  get getOldBottom() { return this.oldPosition.y + this.height; }
+  get getOldTop() { return this.oldPosition.y; }
+  get getOldLeft() { return this.oldPosition.x; }
+  get getOldRight() { return this.oldPosition.x + this.width; }
+  set setBottom(y) { this.position.y = y - this.height; }
+  set setTop(y) { this.position.y = y; }
+  set setLeft(x) { this.position.x = x; }
+  set setRight(x) { this.position.x = x - this.width; }
 }
