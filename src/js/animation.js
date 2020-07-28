@@ -54,7 +54,6 @@ export default class Animation {
     this.count ++;
     while(this.count > this.frameDelay) {
       this.count -= this.frameDelay;
-      // this can be refactored
       this.frameIndex = (this.frameIndex < this.frameSet.length - 1) ? this.frameIndex += 1 : 0;
       this.frameValue = this.frameSet[this.frameIndex];
     }

@@ -39,6 +39,7 @@ export default class Player {
     this.gravity = 0.023333 * this.gridSize; // do not change
     // target x-position of jump
     this.jumpDestance = null;
+    // target x-position of move
     this.moveDistance = null;
     // x-position offset (this is just to fix rouding errors)
     this.offSet = 0.0005 * this.gridSize; // do not change
@@ -155,7 +156,7 @@ export default class Player {
 
   _applyFriction() {
     if (!this.isJumping) {
-      this.vel.x *= 0.92//this.groundFriction;
+      this.vel.x *= this.groundFriction;
     }
   }
 

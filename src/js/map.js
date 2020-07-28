@@ -52,6 +52,9 @@ export default class Map {
       case 5: // wall right
         this.ctx.fillStyle = "#DFB6B6"
         break;
+      case 6: // winning tile
+        this.ctx.fillStyle = "#FFFF00"
+        break;
     }
   }
 }

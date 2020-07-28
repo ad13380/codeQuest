@@ -70,10 +70,7 @@ if (canvas !== null) {
     map.drawMap()
     player.update(deltaTime);
     collision.detect()
-    //player.draw(ctx);
-
     animation.update(ctx)
-
     map.checkWin()
     if (!map.isLevelOver()) {
       requestAnimationFrame(gameLoop)

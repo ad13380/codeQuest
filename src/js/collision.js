@@ -25,6 +25,7 @@ export default class Collision {
       case 3: this.collidePlatformTop(tile_y); break;
       case 4: this.collidePlatformRight(tile_x + this.gridSize); break;
       case 5: this.collidePlatformLeft(tile_x); break;
+      case 6: break;
     }
   }
 
