@@ -8,12 +8,24 @@ export default class Map {
     this.GAME_COLUMNS = gameColumns;
     this.winningTile = winningTile;
     this.gameOver = false
+    this._setTileset()
+    this._setBackgroundImage()
   }
 
   drawMap() {
+    this.ctx.drawImage(this.backgroundImage, 0, 0, this.GRID_SIZE * this.GAME_COLUMNS, this.GRID_SIZE * this.GAME_ROWS)
+
     for (let index = 0; index < this.gridMap.length; index++) {
-      this._selectGridStyle(index)
-      this.ctx.fillRect((index % this.GAME_COLUMNS) * this.GRID_SIZE, Math.floor(index / this.GAME_COLUMNS) * this.GRID_SIZE, this.GRID_SIZE, this.GRID_SIZE);
+      // this._selectGridStyle(index)
+      // this.ctx.fillRect((index % this.GAME_COLUMNS) * this.GRID_SIZE, Math.floor(index / this.GAME_COLUMNS) * this.GRID_SIZE, this.GRID_SIZE, this.GRID_SIZE);
+
+      let source_x = this.tileStyle[this.gridMap[index]][0] * this.tileSize;
+      let source_y = this.tileStyle[this.gridMap[index]][1] * this.tileSize;
+
+      this.ctx.drawImage(this.sheetImage, source_x ,  source_y, this.tileSize, this.tileSize, 
+                        (index % this.GAME_COLUMNS) * this.GRID_SIZE, 
+                        Math.floor(index / this.GAME_COLUMNS) * this.GRID_SIZE, 
+                        this.GRID_SIZE, this.GRID_SIZE)
     }
   }
 
@@ -56,5 +68,47 @@ export default class Map {
         this.ctx.fillStyle = "#FFFF00"
         break;
     }
+  }
+
+  get tileStyle() {
+    return {
+      0: [0, 0], 1: [3, 6], 2: [5, 4], 3: [3, 10], 4: [3, 6], 5: [3, 6],
+      6: [1, 4],
+      // floor
+      11: [3, 6], 12: [5, 6], 13: [7, 6],
+      // platform
+      21: [1, 10], // scaffold
+      22: [3, 10], // plat w/ scaffold
+      23: [5, 10], // plat w/o scaffold
+      // obstacle
+      31: [5, 4], // obstacle w/ scaffold
+      32: [7, 4], // obstacle brick left
+      33: [9, 4], // obstacle brick left
+      34: [1, 6], // obstacle brick left
+
+      36: [1, 8], // ground obstacle - 2
+      37: [3, 8], // ground obstacle - 3
+      38: [5, 8], // ground obstacle - 4      
+      39: [7, 8], // ground obstacle - 5
+      40: [9, 8], // ground obstacle - 6
+      // dark
+      51: [1, 2], // dark - 1
+      52: [3, 2], // dark - 1
+      53: [5, 2], // dark - 1
+
+      // winning tile (to change)
+      99: [1, 4]
+    }
+  }
+
+  _setTileset() {
+    this.sheetImage = new Image();
+    this.sheetImage.src = "./assets/tile-sprite.png";
+    this.tileSize = 48;
+  }
+
+  _setBackgroundImage() {
+    this.backgroundImage = new Image();
+    this.backgroundImage.src = './assets/canvas-background.png'
   }
 }
