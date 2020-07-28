@@ -39,7 +39,7 @@ ReactDOM.render(
 
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <App levels={levels} />
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
