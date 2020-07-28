@@ -17,7 +17,7 @@ describe("Player", () => {
   test("player can move to the right", () => {
     player.moveRight()
     player.update(0.1)
-    expect(player.position.x).toEqual(initial_position.x + player.groundSpeed + player.offSet)
+    expect(player.position.x).toEqual(initial_position.x + player.groundSpeed)
   })
 
   test("player can move to the left", () => {
@@ -53,7 +53,7 @@ describe("Player", () => {
   test("player starts moving when passed a command to moveRight()", () => {
     player.start(['player.moveRight()'])
     player.update(0.1)
-    expect(player.position.x).toEqual(initial_position.x + player.groundSpeed + player.offSet)
+    expect(player.position.x).toEqual(initial_position.x + player.groundSpeed)
   })
 
   test("player starts moving when passed a command to moveLeft()", () => {

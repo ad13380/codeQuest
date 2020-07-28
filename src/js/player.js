@@ -10,7 +10,7 @@ export default class Player {
     this.width = this.gridSize;
     // player position
     this.position = {
-      x: 0,
+      x: this.gridSize,
       y: this.gridSize * this.gameRows - this.height - 3 * this.gridSize,
     };
     // old player position
@@ -34,35 +34,33 @@ export default class Player {
     // jumping?
     this.isJumping = false;
     // ground friction (horizontal friction while on ground)
-    this.groundFriction = 1 - this.groundSpeed / this.gridSize;
+    this.groundFriction = 1 - this.groundSpeed / (this.gridSize * 1.242857);
     // gravity
     this.gravity = 0.023333 * this.gridSize; // do not change
     // target x-position of jump
-    this.jumpDestination = null;
+    this.jumpDestance = null;
+    // target x-position of move
+    this.moveDistance = null;
     // x-position offset (this is just to fix rouding errors)
-    this.offSet = 0.00033333 * this.gridSize; // do not change
+    this.offSet = 0.0005 * this.gridSize; // do not change
     // velocity threshold
     this.thresh = 0.00033333 * this.gridSize;
   }
-
-  // draw(ctx) {
-  //   ctx.fillStyle = 'black'
-  //   return ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
-  // }
 
   update(deltaTime) {
     if (!deltaTime) return
 
     this._updatePosition()
     this._limitJumpDistance()
+    this._limitMoveDistance()
     this._applyFriction()
     this._applyGravity()
   }
 
   async moveRight() {
     if (!this.isJumping && Math.abs(this.vel.x) < this.thresh && Math.abs(this.vel.y) < this.thresh) {
+      this.moveDistance = this.position.x + this.gridSize;
       this.vel.x = this.groundSpeed;
-      this._addOffset(1)
       this.x_direction = 1;
       await this._wait(50) 
     } else {
@@ -73,6 +71,7 @@ export default class Player {
 
   async moveLeft() {
     if (!this.isJumping && Math.abs(this.vel.x) < this.thresh && Math.abs(this.vel.y) < this.thresh) {
+      this.moveDistance = this.position.x - this.gridSize;
       this.vel.x = -this.groundSpeed;
       this.x_direction = -1;
       await this._wait(50)
@@ -117,9 +116,10 @@ export default class Player {
   }
 
   resetPosition() {
+    this.x_direction = 1;
     this.position = {
-      x: 0,
-      y: this.gridSize * this.gameRows - this.height - 3 * this.gridSize,
+      x: this.gridSize,
+      y: this.gridSize * this.gameRows - this.height - 4 * this.gridSize,
     };
   }
   
@@ -167,9 +167,25 @@ export default class Player {
   _limitJumpDistance() {
     if (this.isJumping) {
       if (this.position.x > this.oldPosition.x && this.position.x >= this.jumpDistance) {
+        this.position.x = this.jumpDistance;
         this.vel.x = 0;
       }
       if (this.position.x < this.oldPosition.x && this.position.x <= this.jumpDistance) {
+        this.position.x = this.jumpDistance;
+        this.vel.x = 0;
+      }
+    }
+  }
+
+  _limitMoveDistance() {
+    if (!this.isJumping) {
+      if (this.position.x > this.oldPosition.x && this.position.x >= this.moveDistance) {
+        this.position.x = this.moveDistance;
+        this.vel.x = 0;
+      }
+      if (this.position.x < this.oldPosition.x && this.position.x <= this.moveDistance) {
+        this.position.x = this.moveDistance;
+        this._addOffset(-1);
         this.vel.x = 0;
       }
     }

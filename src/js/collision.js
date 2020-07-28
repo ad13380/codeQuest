@@ -22,6 +22,10 @@ export default class Collision {
       case 0: break;
       case 1: this.collidePlatformTop(tile_y); break;
       case 2: this.allSidesCollision(tile_x, tile_y); break;
+      case 3: this.collidePlatformTop(tile_y); break;
+      case 4: this.collidePlatformRight(tile_x + this.gridSize); break;
+      case 5: this.collidePlatformLeft(tile_x); break;
+      case 6: break;
     }
   }
 
@@ -41,17 +45,19 @@ export default class Collision {
       this.player.setRight = this.gridSize * this.gameColumns - this.offSet;   
       this.player.vel.x = 0; 
     }
-    // top bottom
-    if (this.player.getTop < 0) { 
-      this.player.setTop = 0;             
-      this.player.vel.y = 0; 
-    } else if (this.player.getBottom > this.gridSize * this.gameRows) { 
+    // top bottom (no top collision)
+    // if (this.player.getTop < 0) { 
+    //   this.player.setTop = 0;             
+    //   this.player.vel.y = 0; 
+    // } else 
+    if (this.player.getBottom > this.gridSize * this.gameRows) { 
       this.player.setBottom = this.gridSize * this.gameRows - this.offSet;   
       this.player.vel.y = 0; 
-      if (this.player.isJumping) {  // related to player jumping mechanics
-        this.player.vel.x = 0;
-        this.player.isJumping = false;
-      }
+      this.player.resetPosition()
+      // if (this.player.isJumping) {  // related to player jumping mechanics
+      //   this.player.vel.x = 0;
+      //   this.player.isJumping = false;
+      // }
     }
   }
 

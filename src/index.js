@@ -29,9 +29,9 @@ let animation;
 let frameClass;
 
 // define game area
-const GRID_SIZE = 30;
-const GAME_ROWS = 9;
-const GAME_COLUMNS = 16;
+const GRID_SIZE = 50;
+const GAME_ROWS = 15;
+const GAME_COLUMNS = 18;
 
 //canvas
 let canvas = document.getElementById("gameArea");
@@ -70,10 +70,7 @@ if (canvas !== null) {
     map.drawMap()
     player.update(deltaTime);
     collision.detect()
-    //player.draw(ctx);
-
     animation.update(ctx)
-
     map.checkWin()
     if (!map.isLevelOver()) {
       requestAnimationFrame(gameLoop)

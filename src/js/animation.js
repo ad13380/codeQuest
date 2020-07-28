@@ -3,7 +3,7 @@ export default class Animation {
     this.player = player;
     this.frameClass = frameClass;
     this.thresh_y = 2 // this will need to be adjusted depending on grid size
-    this.thresh_x = 0.7 // this will need to be adjusted depending on grid size
+    this.thresh_x = 0 // this will need to be adjusted depending on grid size
     this._setPlayerTileset()
     this._setFramesArray()
     this._setFrameSets()
@@ -14,13 +14,6 @@ export default class Animation {
     this._updateFrameSet()
     this._drawPlayer(ctx)
     this._updateFrameValue()
-
-    // this._updateFrameValue()
-
-    // update animation depending on player movement
-    // run the loop (go to the next frame in the frame set)
-
-    // draw
   }
 
   _drawPlayer(ctx) {
@@ -31,10 +24,10 @@ export default class Animation {
       frame.y,
       this.tileSize,
       this.tileSize,
-      this.player.position.x,
-      this.player.position.y + frame.offset_y,
-      this.player.width * 1.2,
-      this.player.height,
+      this.player.position.x + frame.offset_x, 
+      this.player.position.y + frame.offset_y, 
+      this.player.width * 1.4,
+      this.player.height * 1.4,
       )
   }
 
@@ -44,8 +37,8 @@ export default class Animation {
       else { this._changeFrameSet('jump-left', 3) }
 
     } else if (this.player.vel.y > this.thresh_y) {
-      if(this.player.x_direction > 0) { this._changeFrameSet('falling-right', 6) } 
-      else { this._changeFrameSet('falling-left', 6) }
+      if(this.player.x_direction > 0) { this._changeFrameSet('falling-right', 3) } 
+      else { this._changeFrameSet('falling-left', 3) }
 
     } else if(this.player.x_direction > 0 && !this.player.isJumping) {
       if(this.player.vel.x > this.thresh_x ) { this._changeFrameSet('move-right', 5) } 
@@ -61,7 +54,6 @@ export default class Animation {
     this.count ++;
     while(this.count > this.frameDelay) {
       this.count -= this.frameDelay;
-      // this can be refactored
       this.frameIndex = (this.frameIndex < this.frameSet.length - 1) ? this.frameIndex += 1 : 0;
       this.frameValue = this.frameSet[this.frameIndex];
     }
@@ -85,52 +77,52 @@ export default class Animation {
 
   _setFramesArray() {
     this.frames = [// idle-right
-                   new this.frameClass(0, 0, this.tileSize, this.tileSize, 0, 2),
-                   new this.frameClass(1 * this.tileSize, 0, this.tileSize, this.tileSize, 0, 2),
-                   new this.frameClass(2 * this.tileSize, 0, this.tileSize, this.tileSize, 0, 2),
-                   new this.frameClass(3 * this.tileSize, 0, this.tileSize, this.tileSize, 0, 2),
+                   new this.frameClass(0, 0, this.tileSize, this.tileSize, -12, -19),
+                   new this.frameClass(1 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -19),
+                   new this.frameClass(2 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -19),
+                   new this.frameClass(3 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -19),
                    // move-right  
-                   new this.frameClass(4 * this.tileSize, 0, this.tileSize, this.tileSize, 0, 1),
-                   new this.frameClass(5 * this.tileSize, 0, this.tileSize, this.tileSize, 0, 1),
-                   new this.frameClass(6 * this.tileSize, 0, this.tileSize, this.tileSize, 0, 1),
-                   new this.frameClass(7 * this.tileSize, 0, this.tileSize, this.tileSize, 0, 1),
-                   new this.frameClass(8 * this.tileSize, 0, this.tileSize, this.tileSize, 0, 1),
-                   new this.frameClass(9 * this.tileSize, 0, this.tileSize, this.tileSize, 0, 1),
+                   new this.frameClass(4 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -20),
+                   new this.frameClass(5 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -20),
+                   new this.frameClass(6 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -20),
+                   new this.frameClass(7 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -20),
+                   new this.frameClass(8 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -20),
+                   new this.frameClass(9 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -20),
                    // jumping-right
-                   new this.frameClass(10 * this.tileSize, 0, this.tileSize, this.tileSize, 0, 0),
-                   new this.frameClass(11 * this.tileSize, 0, this.tileSize, this.tileSize, 0, 0),
-                   new this.frameClass(12 * this.tileSize, 0, this.tileSize, this.tileSize, 0, 0),
-                   new this.frameClass(13 * this.tileSize, 0, this.tileSize, this.tileSize, 0, 0),
-                   new this.frameClass(14 * this.tileSize, 0, this.tileSize, this.tileSize, 0, 0),
-                   new this.frameClass(15 * this.tileSize, 0, this.tileSize, this.tileSize, 0, 0),
-                   new this.frameClass(16 * this.tileSize, 0, this.tileSize, this.tileSize, 0, 0),
+                   new this.frameClass(10 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -17),
+                   new this.frameClass(11 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -17),
+                   new this.frameClass(12 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -17),
+                   new this.frameClass(13 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -17),
+                   new this.frameClass(14 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -17),
+                   new this.frameClass(15 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -17),
+                   new this.frameClass(16 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -17),
                    // falling-right
-                   new this.frameClass(17 * this.tileSize, 0, this.tileSize, this.tileSize, 0, 0),
-                   new this.frameClass(18 * this.tileSize, 0, this.tileSize, this.tileSize, 0, 0),
+                   new this.frameClass(17 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -12),
+                   new this.frameClass(18 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -12),
                    // idle-left
-                   new this.frameClass(18 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, 0, 2),
-                   new this.frameClass(17 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, 0, 2),
-                   new this.frameClass(16 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, 0, 2),
-                   new this.frameClass(15 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, 0, 2),
+                   new this.frameClass(18 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -19),
+                   new this.frameClass(17 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -19),
+                   new this.frameClass(16 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -19),
+                   new this.frameClass(15 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -19),
                    // move-left 
-                   new this.frameClass(14 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, 0, 2),
-                   new this.frameClass(13 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, 0, 2),
-                   new this.frameClass(12 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, 0, 2),
-                   new this.frameClass(11 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, 0, 2),
-                   new this.frameClass(10 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, 0, 2),
-                   new this.frameClass(9 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, 0, 2),
-                   new this.frameClass(8 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, 0, 2),
+                   new this.frameClass(14 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -20),
+                   new this.frameClass(13 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -20),
+                   new this.frameClass(12 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -20),
+                   new this.frameClass(11 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -20),
+                   new this.frameClass(10 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -20),
+                   new this.frameClass(9 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -20),
+                   new this.frameClass(8 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -20),
                    // jumping-right
-                   new this.frameClass(8 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, 0, 2),
-                   new this.frameClass(7 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, 0, 2),
-                   new this.frameClass(6 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, 0, 2),
-                   new this.frameClass(5 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, 0, 2),
-                   new this.frameClass(4 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, 0, 2),
-                   new this.frameClass(3 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, 0, 2),
-                   new this.frameClass(2 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, 0, 2),
+                   new this.frameClass(8 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -17),
+                   new this.frameClass(7 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -17),
+                   new this.frameClass(6 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -17),
+                   new this.frameClass(5 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -17),
+                   new this.frameClass(4 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -17),
+                   new this.frameClass(3 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -17),
+                   new this.frameClass(2 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -17),
                    // falling-right
-                   new this.frameClass(1 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, 0, 2),
-                   new this.frameClass(0 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, 0, 2),
+                   new this.frameClass(1 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -12),
+                   new this.frameClass(0 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -12),
                   ]
   }
 
