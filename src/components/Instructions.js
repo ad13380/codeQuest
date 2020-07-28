@@ -3,8 +3,8 @@ import React from "react";
 function Instructions() {
   return (
     <div className='center mw5 mw7-ns pa3'>
-      <div className='tc ba b--dashed bw3 pa3'>
-        <p>Instructions<br /><br />
+      <div style = {{color: '#B8860B', backgroundColor: 'rgba(256, 256, 256, 0.3)'}} className='tc ba b--dashed bw3 pa3'>
+        <p style = {{color: 'Black'}}>Instructions<br /><br />
         As you read before our hero is a touch stubborn and loves to be a little different, in order to get them to move
         we need to use methods. <br />
         What are methods you ask? well, just picture them as 'things the hero can do', they belong to the hero and only the hero
