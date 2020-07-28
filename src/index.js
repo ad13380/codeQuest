@@ -29,9 +29,9 @@ let animation;
 let frameClass;
 
 // define game area
-const GRID_SIZE = 55;
+const GRID_SIZE = 53;
 const GAME_ROWS = 13;
-const GAME_COLUMNS = 14;
+const GAME_COLUMNS = 18;
 
 //canvas
 let canvas = document.getElementById("gameArea");

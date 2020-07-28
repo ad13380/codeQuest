@@ -77,10 +77,10 @@ export default class Animation {
 
   _setFramesArray() {
     this.frames = [// idle-right
-                   new this.frameClass(0, 0, this.tileSize, this.tileSize, -12, -20),
-                   new this.frameClass(1 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -20),
-                   new this.frameClass(2 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -20),
-                   new this.frameClass(3 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -20),
+                   new this.frameClass(0, 0, this.tileSize, this.tileSize, -12, -19),
+                   new this.frameClass(1 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -19),
+                   new this.frameClass(2 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -19),
+                   new this.frameClass(3 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -19),
                    // move-right  
                    new this.frameClass(4 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -20),
                    new this.frameClass(5 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -20),
@@ -100,10 +100,10 @@ export default class Animation {
                    new this.frameClass(17 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -12),
                    new this.frameClass(18 * this.tileSize, 0, this.tileSize, this.tileSize, -12, -12),
                    // idle-left
-                   new this.frameClass(18 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -20),
-                   new this.frameClass(17 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -20),
-                   new this.frameClass(16 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -20),
-                   new this.frameClass(15 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -20),
+                   new this.frameClass(18 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -19),
+                   new this.frameClass(17 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -19),
+                   new this.frameClass(16 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -19),
+                   new this.frameClass(15 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -19),
                    // move-left 
                    new this.frameClass(14 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -20),
                    new this.frameClass(13 * this.tileSize, 1 * this.tileSize, this.tileSize, this.tileSize, -12, -20),
