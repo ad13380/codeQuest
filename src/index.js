@@ -105,6 +105,7 @@ if (canvas !== null) {
       startGame()
       //clear text area on win
       input.clearTextarea()
+      store.dispatch(increment())
     }
   }
   startGame()
