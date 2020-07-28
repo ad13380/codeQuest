@@ -1,9 +1,12 @@
 import React from "react";
+import { useSelector } from 'react-redux'
 
-function TextArea() {
+function TextArea(store) {
+  let i = useSelector(state => state.counter)
   return (
     <div className='fl w-third tc pa1'>
       <div>
+        {i} <br />
         Make sure you are using the correct commands to move our hero!<br /><br />
         hero.moveRight()<br />
         hero.moveLeft()<br />

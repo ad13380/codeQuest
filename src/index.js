@@ -10,11 +10,37 @@ import Collision from "./js/collision";
 import Animation from "./js/animation"
 import Frame from "./js/frame"
 import levels from './levels'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import { combineReducers } from "redux";
+
+const increment = () => {
+  return {
+    type: 'INCREMENT'
+  }
+}
+
+const counter = (state = 0, action) => {
+  // eslint-disable-next-line default-case
+  switch (action.type) {
+    case 'INCREMENT':
+      return state + 1
+    default:
+      return state;
+  }
+}
+const rootReducer = combineReducers({
+  counter
+});
+
+let store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 ReactDOM.render(
 
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
