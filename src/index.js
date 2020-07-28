@@ -29,8 +29,8 @@ let animation;
 let frameClass;
 
 // define game area
-const GRID_SIZE = 53;
-const GAME_ROWS = 13;
+const GRID_SIZE = 50;
+const GAME_ROWS = 15;
 const GAME_COLUMNS = 18;
 
 //canvas
