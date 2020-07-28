@@ -18,7 +18,7 @@ describe("Input", () => {
   })
 
   test("if class has a list of valid input", () => {
-    expect(input.validInputs).toEqual(['player.moveRight()', 'player.moveLeft()', 'player.jumpRight()', 'player.jumpLeft()'])
+    expect(input.validInputs).toEqual(['hero.moveRight()', 'hero.moveLeft()', 'hero.jumpRight()', 'hero.jumpLeft()'])
   })
 
   test("if class has a empty input array", () => {
@@ -40,19 +40,19 @@ describe("Input", () => {
     // let wrongInput = 'fail me'
     // expect(input._isInputValid(correctInput)).toEqual(true)
     // expect(input._isInputValid(wrongInput)).toEqual(false)
-    let correctString = ('player.moveRight()\nplayer.jumpRight()  \nplayer.jumpLeft()\nplayer.jumpRight()')
+    let correctString = ('hero.moveRight()\nhero.jumpRight()  \nhero.jumpLeft()\nhero.jumpRight()')
     input._stringToArray(correctString)
     expect(input._isInputValid()).toBe(true)
 
   })
   test('_isInputValid returns true when inputs are correct', () => {
-    let correctString = ('player.moveRight()\nplayer.jumpRight()  \nplayer.jumpLeft()\nplayer.jumpRight()')
+    let correctString = ('hero.moveRight()\nhero.jumpRight()  \nhero.jumpLeft()\nhero.jumpRight()')
     input._stringToArray(correctString)
     expect(input._isInputValid()).toBe(true)
 
   })
   test('_isInputValid returns false when inputs are incorrect', () => {
-    let incorrectString = ('player.moveRt()\nplayer.jumpRight()  \nplayer.jumpLeft()\nplayer.jumpRight()')
+    let incorrectString = ('hero.moveRt()\nhero.jumpRight()  \nhero.jumpLeft()\nhero.jumpRight()')
     input._stringToArray(incorrectString)
     expect(input._isInputValid()).toBe(false)
   })

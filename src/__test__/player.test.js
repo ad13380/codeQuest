@@ -51,26 +51,26 @@ describe("Player", () => {
   })
 
   test("player starts moving when passed a command to moveRight()", () => {
-    player.start(['player.moveRight()'])
+    player.start(['hero.moveRight()'])
     player.update(0.1)
     expect(player.position.x).toEqual(initial_position.x + player.groundSpeed)
   })
 
   test("player starts moving when passed a command to moveLeft()", () => {
-    player.start(['player.moveLeft()'])
+    player.start(['hero.moveLeft()'])
     player.update(0.1)
     expect(player.position.x).toEqual(initial_position.x - player.groundSpeed)
   })
 
   test("player starts moving when passed a command to jumpRight()", () => {
-    player.start(['player.jumpRight()'])
+    player.start(['hero.jumpRight()'])
     player.update(0.1)
     expect(player.position.x).toEqual(initial_position.x + player.airSpeed)
     expect(player.position.y).toEqual(initial_position.y - player.jumpSpeed)
   })
 
   test("player starts moving when passed a command to jumpLeft()", () => {
-    player.start(['player.jumpLeft()'])
+    player.start(['hero.jumpLeft()'])
     player.update(0.1)
     expect(player.position.x).toEqual(initial_position.x - player.airSpeed)
     expect(player.position.y).toEqual(initial_position.y - player.jumpSpeed)
