@@ -65,8 +65,9 @@ const GAME_COLUMNS = 18;
 let canvas = document.getElementById("gameArea");
 if (canvas !== null) {
   let ctx = canvas.getContext("2d");
-  // define sound object (this has to be  outside of startGame() loop)
+  // define sound object and play background music
   sound = new Sound()
+  sound.playMusic()
   // increment level counter
   function nextLevel() {
     i++
@@ -83,10 +84,6 @@ if (canvas !== null) {
     input.listenForPlay()
     // event listener for reset button
     input.listenForReset()
-    // event listener for mute key press
-    input.listenForMute()
-    // play music
-    sound.playMusic()
     // start game loop
     gameLoop()
   }
@@ -116,5 +113,8 @@ if (canvas !== null) {
       store.dispatch(increment())
     }
   }
-  startGame()
+  window.onload = () => {
+    startGame()
+    input.listenForMute()
+  }
 }
