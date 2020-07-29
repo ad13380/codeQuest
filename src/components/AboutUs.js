@@ -4,7 +4,7 @@ function AboutUs() {
   return (
     <div className="tc">
 
-    <h3> About us: </h3><br/>
+    <h3 className='white'> About us: </h3><br/>
 
 
 
