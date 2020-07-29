@@ -1,6 +1,7 @@
 export default class Map {
-  constructor(player, ctx, gridMap, gridSize, gameRows, gameColumns, winningTile) {
+  constructor(player, ctx, gridMap, gridSize, gameRows, gameColumns, winningTile, sound) {
     this.player = player;
+    this.sound = sound;
     this.ctx = ctx;
     this.gridMap = gridMap;
     this.GRID_SIZE = gridSize;
@@ -28,7 +29,10 @@ export default class Map {
   checkWin() {
     let xCheck = this.winningTile.x === Math.round(this.player.position.x / this.GRID_SIZE);
     let yCheck = this.winningTile.y === Math.round(this.player.position.y / this.GRID_SIZE);
-    if (xCheck && yCheck) this.gameOver = true
+    if (xCheck && yCheck) {
+      this.sound.playCollectCoin()
+      this.gameOver = true;
+    } 
   }
 
   clearMap() {
