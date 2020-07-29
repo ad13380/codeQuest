@@ -7,7 +7,7 @@ describe("Map", () => {
   let map;
   let player;
 
-  beforeEach(()=>{
+  beforeEach(() => {
     player = new Player()
     map = new Map(player, "ctx", "gridMap", "gridSize", "gameRows", "gameColumns", "winningTile")
     Player.mockClear()
@@ -18,6 +18,13 @@ describe("Map", () => {
 
   })
 
+  test('Returns value of gameOver variable', () => {
+    expect(map.isLevelOver()).toEqual(false)
+  })
+
+  test('Returns an object containing the tile styles for the map', () => {
+    expect(map.tileStyle).toBeInstanceOf(Object)
+  })
 
 
 })
