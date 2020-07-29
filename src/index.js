@@ -83,8 +83,6 @@ if (canvas !== null) {
     input.listenForPlay()
     // event listener for reset button
     input.listenForReset()
-    // event listener for mute key press
-    input.listenForMute()
     // play music
     sound.playMusic()
     // start game loop
@@ -117,4 +115,7 @@ if (canvas !== null) {
     }
   }
   startGame()
+
+  // event listener for mute key press
+  input.listenForMute()
 }
