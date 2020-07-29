@@ -39,9 +39,8 @@ const GAME_COLUMNS = 18;
 let canvas = document.getElementById("gameArea");
 if (canvas !== null) {
   let ctx = canvas.getContext("2d");
-  // define sound object & play background music
+  // define sound object (this has to be  outside of startGame() loop)
   sound = new Sound()
-  sound.playMusic()
   // increment level counter
   function nextLevel() {
     i++
@@ -60,6 +59,8 @@ if (canvas !== null) {
     input.listenForReset()
     // event listener for mute key press
     input.listenForMute()
+    // play music
+    sound.playMusic()
     // start game loop
     gameLoop()
   }
