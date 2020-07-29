@@ -16,12 +16,8 @@ export default class Map {
     this.ctx.drawImage(this.backgroundImage, 0, 0, this.GRID_SIZE * this.GAME_COLUMNS, this.GRID_SIZE * this.GAME_ROWS)
 
     for (let index = 0; index < this.gridMap.length; index++) {
-      // this._selectGridStyle(index)
-      // this.ctx.fillRect((index % this.GAME_COLUMNS) * this.GRID_SIZE, Math.floor(index / this.GAME_COLUMNS) * this.GRID_SIZE, this.GRID_SIZE, this.GRID_SIZE);
-
       let source_x = this.tileStyle[this.gridMap[index]][0] * this.tileSize;
       let source_y = this.tileStyle[this.gridMap[index]][1] * this.tileSize;
-
       this.ctx.drawImage(this.sheetImage, source_x ,  source_y, this.tileSize, this.tileSize, 
                         (index % this.GAME_COLUMNS) * this.GRID_SIZE, 
                         Math.floor(index / this.GAME_COLUMNS) * this.GRID_SIZE, 
@@ -43,39 +39,14 @@ export default class Map {
     return this.gameOver
   }
 
-  _selectGridStyle(index) {
-    // eslint-disable-next-line default-case
-    switch (this.gridMap[index]) {
-      case 0: // free tile
-        this.ctx.fillStyle = "#FFFFFF"
-        break;
-      case 1: // floor
-        this.ctx.fillStyle = "#D8C1A4"
-        break; 
-      case 2: // obstacle
-        this.ctx.fillStyle = "#B7E1D2"
-        break;
-      case 3: // platform
-        this.ctx.fillStyle = "#B6D3DA" 
-        break;
-      case 4: // wall left
-        this.ctx.fillStyle = "#DFB6DA"
-        break;
-      case 5: // wall right
-        this.ctx.fillStyle = "#DFB6B6"
-        break;
-      case 6: // winning tile
-        this.ctx.fillStyle = "#FFFF00"
-        break;
-    }
-  }
-
   get tileStyle() {
     return {
-      0: [0, 0], 1: [3, 6], 2: [5, 4], 3: [3, 10], 4: [3, 6], 5: [9, 10],
-      6: [1, 4],
+      // open space
+      0: [0, 0],
       // floor
-      11: [3, 6], 12: [5, 6], 13: [7, 6],
+      11: [3, 6], // floor - 1
+      12: [5, 6], // floor - 2
+      13: [7, 6], // floor - 3
       // platform
       21: [1, 10], // scaffold
       22: [3, 10], // plat w/ scaffold
@@ -93,16 +64,13 @@ export default class Map {
       40: [9, 8], // ground obstacle - 6
       // dark
       51: [1, 2], // dark - 1
-      52: [3, 2], // dark - 1
-      53: [5, 2], // dark - 1
+      52: [3, 2], // dark - 2
+      53: [5, 2], // dark - 3
       // construction
       61: [7, 2],
       62: [9, 2],
       63: [1, 4],
       64: [3, 4],
-
-      // winning tile (to change)
-      99: [1, 4]
     }
   }
 

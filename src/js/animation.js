@@ -18,7 +18,6 @@ export default class Animation {
     this._drawPlayer(ctx)
     this._drawWinningTile(ctx)
     this._updateFrameValue()
-    this._updateWinningTileValue()
   }
 
   _drawPlayer(ctx) {
@@ -75,9 +74,7 @@ export default class Animation {
       this.frameIndex = (this.frameIndex < this.frameSet.length - 1) ? this.frameIndex += 1 : 0;
       this.frameValue = this.frameSet[this.frameIndex];
     }
-  }
 
-  _updateWinningTileValue() {
     this.winningTileCount++;
     while(this.winningTileCount > this.winningTileFrameDelay) {
       this.winningTileCount -= this.winningTileFrameDelay;
