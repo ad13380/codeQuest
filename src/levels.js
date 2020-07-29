@@ -19,7 +19,9 @@ const levels = [
     winningTile: {
       x: 8,
       y: 13
-    }
+    },
+    instructions: 'Move Right'
+
   },
   {
     map: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -41,7 +43,10 @@ const levels = [
     winningTile: {
       x: 13,
       y: 4
-    }
+
+    },
+    instructions: 'Jump Right'
+
   },
   {
     map: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

@@ -1,9 +1,13 @@
 import React from "react";
+import { useSelector } from 'react-redux'
 
-function TextArea() {
+function TextArea(props) {
+  let levels = props.levels
+  let i = useSelector(state => state.counter)
   return (
-    <div className='fl w-third tc pa1' style = {{color: 'white'}}>
-      <div >
+    <div className='fl w-third tc pa1 white'>
+      <div>
+        {levels[i].instructions}<br />
         Make sure you are using the correct commands to move our hero!<br /><br />
         <div style = {{color: '#ffff66'}}>
         hero.moveRight()<br />

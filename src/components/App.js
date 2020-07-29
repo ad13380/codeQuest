@@ -9,14 +9,16 @@ import Home from './Home'
 
 // import Canvas from "./Canvas"
 
-function App() {
+function App(props) {
   return (
     <div>
 
       <Header />
       <Router>
         <Route path='/' exact component={Home} />
-        <Route path="/play" exact component={Play} />
+        <Route path="/play" render={() => (
+          <Play {...props} />
+        )} />
         <Route path="/instructions" exact component={Instructions} />
         <Route path="/aboutus" exact component={AboutUs} />
       </Router>

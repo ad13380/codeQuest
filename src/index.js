@@ -11,11 +11,37 @@ import Animation from "./js/animation"
 import Frame from "./js/frame"
 import levels from './levels'
 import Sound from "./js/sound";
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import { combineReducers } from "redux";
+
+const increment = () => {
+  return {
+    type: 'INCREMENT'
+  }
+}
+
+const counter = (state = 0, action) => {
+  // eslint-disable-next-line default-case
+  switch (action.type) {
+    case 'INCREMENT':
+      return state + 1
+    default:
+      return state;
+  }
+}
+const rootReducer = combineReducers({
+  counter
+});
+
+let store = createStore(rootReducer)
 
 ReactDOM.render(
 
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App levels={levels} />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
@@ -87,6 +113,7 @@ if (canvas !== null) {
       startGame()
       //clear text area on win
       input.clearTextarea()
+      store.dispatch(increment())
     }
   }
   startGame()
