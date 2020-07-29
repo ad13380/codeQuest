@@ -45,7 +45,7 @@ if (canvas !== null) {
     // define objects
     player = new Player(GAME_ROWS, GAME_COLUMNS, GRID_SIZE)
     frameClass = Frame;
-    animation = new Animation(player, frameClass)
+    animation = new Animation(player, frameClass, levels[i].winningTile, GRID_SIZE)
     input = new Input(player)
     map = new Map(player, ctx, levels[i].map, GRID_SIZE, GAME_ROWS, GAME_COLUMNS, levels[i].winningTile)
     collision = new Collision(player, levels[i].map, GRID_SIZE, GAME_ROWS, GAME_COLUMNS)

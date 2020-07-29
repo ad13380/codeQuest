@@ -1,10 +1,13 @@
 export default class Animation {
-  constructor(player, frameClass) {
+  constructor(player, frameClass, winningTile, gridSize) {
     this.player = player;
     this.frameClass = frameClass;
-    this.thresh_y = 2 // this will need to be adjusted depending on grid size
-    this.thresh_x = 0 // this will need to be adjusted depending on grid size
+    this.thresh_y = 2; // this will need to be adjusted depending on grid size
+    this.thresh_x = 0; // this will need to be adjusted depending on grid size
+    this.winningTile = winningTile;
+    this.gridSize = gridSize;
     this._setPlayerTileset()
+    this._setWinningTileset()
     this._setFramesArray()
     this._setFrameSets()
     this._setInitialFrameSetAndValue()
@@ -13,7 +16,9 @@ export default class Animation {
   update(ctx) {
     this._updateFrameSet()
     this._drawPlayer(ctx)
+    this._drawWinningTile(ctx)
     this._updateFrameValue()
+    this._updateWinningTileValue()
   }
 
   _drawPlayer(ctx) {
@@ -28,6 +33,19 @@ export default class Animation {
       this.player.position.y + frame.offset_y, 
       this.player.width * 1.4,
       this.player.height * 1.4,
+      )
+  }
+
+  _drawWinningTile(ctx) {
+    ctx.drawImage(this.winningTileImage,
+      this.winningTileFrameIndex * this.winningTileSize, 
+      0,
+      this.winningTileSize,
+      this.winningTileSize,
+      this.winningTile.x * this.gridSize, 
+      this.winningTile.y * this.gridSize, 
+      this.gridSize,
+      this.gridSize,
       )
   }
 
@@ -59,6 +77,14 @@ export default class Animation {
     }
   }
 
+  _updateWinningTileValue() {
+    this.winningTileCount++;
+    while(this.winningTileCount > this.winningTileFrameDelay) {
+      this.winningTileCount -= this.winningTileFrameDelay;
+      this.winningTileFrameIndex = (this.winningTileFrameIndex < this.winningTileFrameLength - 1) ? this.winningTileFrameIndex += 1 : 0;
+    }
+  }
+
   _changeFrameSet(frameSet, frameDelay, frameIndex = 0) {
     if (this.frameSet === this.frameSets[frameSet]) { return; }
 
@@ -73,6 +99,13 @@ export default class Animation {
     this.sheetImage = new Image();
     this.sheetImage.src = "./assets/adventurer-sprite.png";
     this.tileSize = 37;
+  }
+
+  _setWinningTileset() {
+    this.winningTileImage = new Image();
+    this.winningTileImage.src = "./assets/winning-tile-sprite.png";
+    this.winningTileSize = 16;
+    this.winningTileFrameLength = 8;
   }
 
   _setFramesArray() {
@@ -139,11 +172,14 @@ export default class Animation {
     }
   }
 
-  _setInitialFrameSetAndValue() { // initial animation condition / may not need if you have an idle/falling
+  _setInitialFrameSetAndValue() {
     this.count       = 0;
+    this.winningTileCount = 0;
     this.frameDelay  = 10; 
+    this.winningTileFrameDelay = 6;
     this.frameSet    = this.frameSets['idle-right'];
     this.frameIndex = 0;
+    this.winningTileFrameIndex = 0;
     this.frameValue = this.frameSet[this.frameIndex];
   }
 }
