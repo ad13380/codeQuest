@@ -72,7 +72,7 @@ export default class Map {
 
   get tileStyle() {
     return {
-      0: [0, 0], 1: [3, 6], 2: [5, 4], 3: [3, 10], 4: [3, 6], 5: [3, 6],
+      0: [0, 0], 1: [3, 6], 2: [5, 4], 3: [3, 10], 4: [3, 6], 5: [9, 10],
       6: [1, 4],
       // floor
       11: [3, 6], 12: [5, 6], 13: [7, 6],
@@ -83,9 +83,9 @@ export default class Map {
       // obstacle
       31: [5, 4], // obstacle w/ scaffold
       32: [7, 4], // obstacle brick left
-      33: [9, 4], // obstacle brick left
-      34: [1, 6], // obstacle brick left
-
+      33: [9, 4], // obstacle brick 
+      34: [1, 6], // obstacle brick right
+      35: [9, 6], // ground obstacle - 2
       36: [1, 8], // ground obstacle - 2
       37: [3, 8], // ground obstacle - 3
       38: [5, 8], // ground obstacle - 4      
