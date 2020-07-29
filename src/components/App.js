@@ -6,11 +6,13 @@ import Instructions from './Instructions'
 import AboutUs from './AboutUs'
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import Home from './Home'
+
 // import Canvas from "./Canvas"
 
 function App() {
   return (
     <div>
+
       <Header />
       <Router>
         <Route path='/' exact component={Home} />
