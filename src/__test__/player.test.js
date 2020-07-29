@@ -115,4 +115,20 @@ describe("Player", () => {
     player.update()
     expect(player.position.x).toEqual(player.vel.x)
   })
+
+  test("limiting move distance", () => {
+    player._limitMoveDistance()
+    expect(player.vel.x).toEqual(0)
+  })
+
+  test("restarting position", () => {
+    player.jumpRight()
+    player.jumpRight()
+    player.moveRight()
+    player.jumpLeft()
+    player.jumpRight()
+    player.moveLeft()
+    player.resetPosition()
+    expect(player.position.x).toEqual(player.gridSize)
+  })
 }) 
