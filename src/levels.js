@@ -20,7 +20,7 @@ const levels = [
       x: 8,
       y: 13
     },
-    instructions: 'Lets start of simple. You need to collect the treasure to move onto the next level. Make sure that you do so using one set of commands, if you don\'t make it, hit reset and try again!'
+    instructions: 'Let\'s start off simple. You need to collect the treasure to move onto the next level. Make sure that you do so using one set of commands, if you don\'t make it, hit reset and try again!'
 
   },
   {
@@ -69,7 +69,7 @@ const levels = [
       x: 3,
       y: 5
     },
-    instructions: 'Watch out for pitfalls! though all they really do is reset you to the start. Also note you cant jump through brick platforms'
+    instructions: 'Watch out for pitfalls! Though all they really do is reset you to the start. Also note you can\'t jump through brick platforms'
   },
   {
     map: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -92,7 +92,7 @@ const levels = [
       x: 6,
       y: 2
     },
-    instructions: 'Things are starting to get a little harder for our hero, but you got this! Make sure you use one set of commands to get our hero from the start to the treasure!'
+    instructions: 'Things are starting to get a little harder for our hero, but you\'ve got this! Make sure you use one set of commands to get our hero from the start to the treasure!'
   },
   {
     map: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -138,7 +138,7 @@ const levels = [
       x: 3,
       y: 4
     },
-    instructions: 'Mazes, a quest would not be complete without at least one! remember, one set of move, don\'t cheat now!'
+    instructions: 'Mazes, a quest would not be complete without at least one! Remember, one set of move, don\'t cheat now!'
   },
   {
     map: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -161,7 +161,7 @@ const levels = [
       x: 4,
       y: 1
     },
-    instructions: 'You need to be precise with your commands, one wrong move and our hero is a goner!! take your time and plan ahead'
+    instructions: 'You need to be precise with your commands, one wrong move and our hero is a goner!! Take your time and plan ahead'
   },
   {
     map: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -183,8 +183,8 @@ const levels = [
     winningTile: {
       x: 9,
       y: 4
-    }
-
+    },
+    instructions: 'Well this is embarrassing... Check back later!'
   },
 ]
 export default levels;
