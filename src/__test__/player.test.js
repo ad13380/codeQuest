@@ -121,6 +121,12 @@ describe("Player", () => {
     expect(player.vel.x).toEqual(0)
   })
 
+  test("limit jump distance", () => {
+    player.isJumping = true 
+    player._limitJumpDistance()
+    expect(player.vel.x).toEqual(0)
+  })
+
   test("restarting position", () => {
     player.jumpRight()
     player.jumpRight()
@@ -130,5 +136,6 @@ describe("Player", () => {
     player.moveLeft()
     player.resetPosition()
     expect(player.position.x).toEqual(player.gridSize)
+    expect(player.position.y).toEqual(player.gridSize * player.gameRows - player.height - 4 * player.gridSize,)
   })
 }) 
