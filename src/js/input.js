@@ -1,6 +1,7 @@
 export default class Input {
-  constructor(player) {
-    this.player = player
+  constructor(player, sound) {
+    this.player = player;
+    this.sound = sound;
     this.btnPlay = document.getElementById("play");
     this.btnReset = document.getElementById("reset")
     this.errorMessage = document.getElementById("ErrorMessage")
@@ -30,7 +31,18 @@ export default class Input {
     this.btnReset.addEventListener("click", () => {
       this.player.resetPosition()
     });
+  }
 
+  listenForMute() {
+    window.addEventListener("keydown", (event) => {
+      if(event.keyCode === 88) { // press x for mute
+        if (this.sound.isMuted) {
+          this.sound.playMusic()
+        } else {
+          this.sound.muteMusic()
+        }
+      }
+    });
   }
 
   _stringToArray(inputString) {
