@@ -70,6 +70,7 @@ export default class Input {
   clearTextarea() {
     let inputString = document.getElementById("userInput")
     inputString.value = ""
+    console.log(inputString.value)
   }
 }
 
