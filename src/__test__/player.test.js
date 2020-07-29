@@ -110,4 +110,9 @@ describe("Player", () => {
     player.setRight = 2.34;
     expect(player.position.x).toEqual(initial_position.x - player.width + 2.34)
   })
+
+  test("updating player", () => {
+    player.update()
+    expect(player.position.x).toEqual(player.vel.x)
+  })
 }) 
