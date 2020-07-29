@@ -20,32 +20,32 @@ const levels = [
       x: 8,
       y: 13
     },
-    instructions: 'Move Right'
+    instructions: 'Lets start of simple. You need to collect the treasure to move onto the next level. Make sure that you do so using one set of commands, if you don\'t make it, hit reset and try again!'
 
   },
   {
     map: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 23, 22, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 21, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 21, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 22, 23, 22, 21, 0, 21, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 21, 21, 0, 21, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 21, 21, 0, 21, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 22, 23, 22, 21, 0, 21, 21, 0, 21, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 21, 0, 21, 21, 0, 21, 21, 0, 21, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 21, 0, 21, 21, 0, 21, 21, 0, 21, 0, 0, 0, 0,
-          11, 12, 13, 12, 11, 12, 13, 12, 11, 12, 13, 12, 11, 12, 13, 12, 11, 12],
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 23, 22, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 21, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 21, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 22, 23, 22, 21, 0, 21, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 21, 21, 0, 21, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 21, 21, 0, 21, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 22, 23, 22, 21, 0, 21, 21, 0, 21, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 21, 0, 21, 21, 0, 21, 21, 0, 21, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 21, 0, 21, 21, 0, 21, 21, 0, 21, 0, 0, 0, 0,
+      11, 12, 13, 12, 11, 12, 13, 12, 11, 12, 13, 12, 11, 12, 13, 12, 11, 12],
 
     winningTile: {
       x: 13,
       y: 4
 
     },
-    instructions: 'Jump Right'
+    instructions: 'Our hero is quite the acrobat, they are also able to jump through wooden platforms, don\'t ask how because I don\'t know'
 
   },
   {
@@ -68,7 +68,8 @@ const levels = [
     winningTile: {
       x: 3,
       y: 5
-    }
+    },
+    instructions: 'Watch out for pitfalls! though all they really do is reset you to the start. Also note you cant jump through brick platforms'
   },
   {
     map: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -90,7 +91,8 @@ const levels = [
     winningTile: {
       x: 6,
       y: 2
-    }
+    },
+    instructions: 'Things are starting to get a little harder for our hero, but you got this! Make sure you use one set of commands to get our hero from the start to the treasure!'
   },
   {
     map: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -112,7 +114,8 @@ const levels = [
     winningTile: {
       x: 16,
       y: 13
-    }
+    },
+    instructions: 'Our hero can get places that no one else can, but that gap looks mighty tight! I also agree, leaving a treasure above a pit like that is very irresponsible'
   },
   {
     map: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -134,7 +137,8 @@ const levels = [
     winningTile: {
       x: 3,
       y: 4
-    }
+    },
+    instructions: 'Mazes, a quest would not be complete without at least one! remember, one set of move, don\'t cheat now!'
   },
   {
     map: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -156,7 +160,8 @@ const levels = [
     winningTile: {
       x: 4,
       y: 1
-    }
+    },
+    instructions: 'You need to be precise with your commands, one wrong move and our hero is a goner!! take your time and plan ahead'
   },
   {
     map: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
