@@ -19,13 +19,28 @@ export default class Collision {
   gridCollisionType(value, tile_x, tile_y) {
     // eslint-disable-next-line default-case
     switch(value) {
-      case 0: break;
       case 1: this.collidePlatformTop(tile_y); break;
       case 2: this.allSidesCollision(tile_x, tile_y); break;
       case 3: this.collidePlatformTop(tile_y); break;
       case 4: this.collidePlatformRight(tile_x + this.gridSize); break;
       case 5: this.collidePlatformLeft(tile_x); break;
-      case 6: break;
+
+      case 11: this.collidePlatformTop(tile_y); break; // floor - 1 
+      case 12: this.collidePlatformTop(tile_y); break; // floor - 2 
+      case 13: this.collidePlatformTop(tile_y); break; // floor - 3 
+
+      case 22: this.collidePlatformTop(tile_y); break; // plat-scaffold 
+      case 23: this.collidePlatformTop(tile_y); break; // plat-no-scaffold 
+
+      case 31: this.allSidesCollision(tile_x, tile_y); break; // obst-scaffold
+      case 32: this.allSidesCollision(tile_x, tile_y); break; // obst-brick-left
+      case 33: this.allSidesCollision(tile_x, tile_y); break; // obst-brick-middle
+      case 34: this.allSidesCollision(tile_x, tile_y); break; // obst-brick-right
+      case 36: this.allSidesCollision(tile_x, tile_y); break; // obst-ground-2
+      case 37: this.allSidesCollision(tile_x, tile_y); break; // obst-ground-3
+      case 38: this.allSidesCollision(tile_x, tile_y); break; // obst-ground-4
+      case 39: this.allSidesCollision(tile_x, tile_y); break; // obst-ground-5
+      case 40: this.allSidesCollision(tile_x, tile_y); break; // obst-ground-6
     }
   }
 

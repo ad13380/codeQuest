@@ -10,6 +10,7 @@ import Collision from "./js/collision";
 import Animation from "./js/animation"
 import Frame from "./js/frame"
 import levels from './levels'
+import Sound from "./js/sound";
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { combineReducers } from "redux";
@@ -53,6 +54,7 @@ let collision;
 let input;
 let animation;
 let frameClass;
+let sound;
 
 // define game area
 const GRID_SIZE = 50;
@@ -63,6 +65,8 @@ const GAME_COLUMNS = 18;
 let canvas = document.getElementById("gameArea");
 if (canvas !== null) {
   let ctx = canvas.getContext("2d");
+  // define sound object (this has to be  outside of startGame() loop)
+  sound = new Sound()
   // increment level counter
   function nextLevel() {
     i++
@@ -71,14 +75,18 @@ if (canvas !== null) {
     // define objects
     player = new Player(GAME_ROWS, GAME_COLUMNS, GRID_SIZE)
     frameClass = Frame;
-    animation = new Animation(player, frameClass)
-    input = new Input(player)
+    animation = new Animation(player, frameClass, levels[i].winningTile, GRID_SIZE)
+    input = new Input(player, sound)
     map = new Map(player, ctx, levels[i].map, GRID_SIZE, GAME_ROWS, GAME_COLUMNS, levels[i].winningTile)
     collision = new Collision(player, levels[i].map, GRID_SIZE, GAME_ROWS, GAME_COLUMNS)
     // event listener for play button
     input.listenForPlay()
     // event listener for reset button
     input.listenForReset()
+    // event listener for mute key press
+    input.listenForMute()
+    // play music
+    sound.playMusic()
     // start game loop
     gameLoop()
   }
