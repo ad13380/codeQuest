@@ -95,6 +95,11 @@ export default class Map {
       51: [1, 2], // dark - 1
       52: [3, 2], // dark - 1
       53: [5, 2], // dark - 1
+      // construction
+      61: [7, 2],
+      62: [9, 2],
+      63: [1, 4],
+      64: [3, 4],
 
       // winning tile (to change)
       99: [1, 4]
