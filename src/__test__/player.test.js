@@ -110,4 +110,32 @@ describe("Player", () => {
     player.setRight = 2.34;
     expect(player.position.x).toEqual(initial_position.x - player.width + 2.34)
   })
+
+  test("updating player", () => {
+    player.update()
+    expect(player.position.x).toEqual(player.vel.x)
+  })
+
+  test("limiting move distance", () => {
+    player._limitMoveDistance()
+    expect(player.vel.x).toEqual(0)
+  })
+
+  test("limit jump distance", () => {
+    player.isJumping = true 
+    player._limitJumpDistance()
+    expect(player.vel.x).toEqual(0)
+  })
+
+  test("restarting position", () => {
+    player.jumpRight()
+    player.jumpRight()
+    player.moveRight()
+    player.jumpLeft()
+    player.jumpRight()
+    player.moveLeft()
+    player.resetPosition()
+    expect(player.position.x).toEqual(player.gridSize)
+    expect(player.position.y).toEqual(player.gridSize * player.gameRows - player.height - 4 * player.gridSize,)
+  })
 }) 
