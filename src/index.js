@@ -75,18 +75,14 @@ if (canvas !== null) {
     // define objects
     player = new Player(GAME_ROWS, GAME_COLUMNS, GRID_SIZE)
     frameClass = Frame;
-    animation = new Animation(player, frameClass, levels[i].winningTile, GRID_SIZE)
+    animation = new Animation(player, frameClass, levels[i].winningTile, GRID_SIZE, sound)
     input = new Input(player, sound)
-    map = new Map(player, ctx, levels[i].map, GRID_SIZE, GAME_ROWS, GAME_COLUMNS, levels[i].winningTile)
+    map = new Map(player, ctx, levels[i].map, GRID_SIZE, GAME_ROWS, GAME_COLUMNS, levels[i].winningTile, sound)
     collision = new Collision(player, levels[i].map, GRID_SIZE, GAME_ROWS, GAME_COLUMNS)
     // event listener for play button
     input.listenForPlay()
     // event listener for reset button
     input.listenForReset()
-    // event listener for mute key press
-    input.listenForMute()
-    // play music
-    sound.playMusic()
     // start game loop
     gameLoop()
   }
@@ -116,5 +112,13 @@ if (canvas !== null) {
       store.dispatch(increment())
     }
   }
-  startGame()
+  // start game after window load
+  window.onload = () => {
+    // start game
+    startGame()
+    // play music
+    sound.playMusic()
+    // event listener for mute key press
+    input.listenForMute()
+  }
 }
