@@ -44,6 +44,10 @@ If the hero falls down a hole then he is sent back to the starting position of t
 [Anthony Donovan](https://github.com/ad13380)<br/>
 [Chris Cooney](https://github.com/ChrisCooney05)<br/>
 
+## Approach
+
+<img src="./public/prototyping.png" width="600px">
+
 ## Technologies
 
 | Area                 | Technology             |
