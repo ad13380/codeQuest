@@ -1,17 +1,21 @@
-# codeQuest()
+<div align="center">
+<img src="./public/codequest_title.png" width="500px">
+<br><br>
 
 [![Build Status](https://travis-ci.com/ChrisCooney05/codeQuest.svg?branch=master)](https://travis-ci.com/ChrisCooney05/codeQuest)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e2dd292d-0968-4564-b990-02ce06425514/deploy-status)](https://app.netlify.com/sites/lets-codequest/deploys)
+
+</div>
 
 Welcome to codeQuest() if you would like to give our game a try please [click here](https://lets-codequest.netlify.app/)
 
 ## How to play
 
-Unlike other platformers you can't control our hero using standard up left/right key presses. Instead to get our hero moving you need to use methods attached to our hero! thats right, a platformer controlled with code!<br/><br/>
-Below you can see how movement is controlled<br/>
-![move](./public/move.gifs)<br/><br/>
-Also a display of how levels are passed
-![win](public/win.gif)
+![move](./public/falling.gif)
+![move](./public/reset.gif)
+![move](./public/combo.gif)
+![move](./public/clearing.gif)
+![move](./public/single.gif)
 
 ## Team codeQuest()
 
