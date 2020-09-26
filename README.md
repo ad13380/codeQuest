@@ -46,6 +46,11 @@ If the hero falls down a hole then he is sent back to the starting position of t
 
 ## Approach
 
+With React and game development being relatively new concepts to the team, we opted to approach this project by first utilising our existing Javascript knowledge to build out some of the core features. From this point, we decided on a list of features that we could conceivably implement within the 2 week project timeframe and began ordering them by importance. Through a series of 2 days sprints, we incrementally added functionality to our program leading up to its current incarnation.
+As a result of our development style, many of the initial features were spiked. Once we were more confident with the various game development concepts, we went through our existing code base and methodically refactored and tested each feature.
+
+Our initial prototype was focused around the implementation of basic game physics. From there, we began adding avatar animation that responded to avatar speed and direction. We then introduced level obstacles which involved more complex game physics and collision detection. We finally worked on level design and styling the various components.
+
 <img src="./public/prototyping.png">
 
 ## Technologies
