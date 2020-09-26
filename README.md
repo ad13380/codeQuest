@@ -16,18 +16,23 @@ A lot of thought was put into the sort of learning environment we wanted to crea
 ## How to play
 
 Players are presented with an avatar (the ‘Hero’) which they can control by entering commands into the terminal and clicking the “Play” button. The avatar can perform simple movements by responding to single commands:
+
 ![move](./public/single.gif)
 
 By creating a chain of multiple commands, the hero can perform more complex movements that allow him to jump onto or over obstacles within the level:
+
 ![move](./public/combo.gif)
 
 A level is cleared by collecting the golden coin. Once a coin is collected, a new and more complex level is rendered:
+
 ![move](./public/clearing.gif)
 
 If the player does not clear the level with the set of commands they have entered, they can send the hero back to the starting position without resetting the commands by clicking the “Back to Start” button:
+
 ![move](./public/reset.gif)
 
 If the hero falls down a hole then he is sent back to the starting position of the same level:
+
 ![move](./public/falling.gif)
 
 ## Team codeQuest()
