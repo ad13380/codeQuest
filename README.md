@@ -7,7 +7,7 @@
 
 </div>
 
-Welcome to codeQuest() if you would like to give our game a try please [click here](https://lets-codequest.netlify.app/). This game also won [Best Project of August](https://careerkarma.com/discussions/projects/codequest-174/) as voted by the Career Karma community.
+Welcome to codeQuest(), if you would like to give our game a try you can play it [here](https://lets-codequest.netlify.app/). This game also won [Best Project of August](https://careerkarma.com/discussions/projects/codequest-174/) as voted by the Career Karma community.
 
 The goal of this project is to teach basic problem solving concepts to young children, while introducing them to some basic programming syntax. It is a platform game like many others - but with a twist. You must run and jump across the map in order to collect the coins and clear the levels; but instead of moving your player using keystrokes, you enter commands into a terminal and watch as he carries them out one at a time.
 
@@ -15,11 +15,20 @@ A lot of thought was put into the sort of learning environment we wanted to crea
 
 ## How to play
 
-![move](./public/falling.gif)
-![move](./public/reset.gif)
-![move](./public/combo.gif)
-![move](./public/clearing.gif)
+Players are presented with an avatar (the ‘Hero’) which they can control by entering commands into the terminal and clicking the “Play” button. The avatar can perform simple movements by responding to single commands:
 ![move](./public/single.gif)
+
+By creating a chain of multiple commands, the hero can perform more complex movements that allow him to jump onto or over obstacles within the level:
+![move](./public/combo.gif)
+
+A level is cleared by collecting the golden coin. Once a coin is collected, a new and more complex level is rendered:
+![move](./public/clearing.gif)
+
+If the player does not clear the level with the set of commands they have entered, they can send the hero back to the starting position without resetting the commands by clicking the “Back to Start” button:
+![move](./public/reset.gif)
+
+If the hero falls down a hole then he is sent back to the starting position of the same level:
+![move](./public/falling.gif)
 
 ## Team codeQuest()
 
