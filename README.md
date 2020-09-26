@@ -7,7 +7,11 @@
 
 </div>
 
-Welcome to codeQuest() if you would like to give our game a try please [click here](https://lets-codequest.netlify.app/)
+Welcome to codeQuest() if you would like to give our game a try please [click here](https://lets-codequest.netlify.app/). This game also won [Best Project of August](https://careerkarma.com/discussions/projects/codequest-174/) as voted by the Career Karma community.
+
+The goal of this project is to teach basic problem solving concepts to young children, while introducing them to some basic programming syntax. It is a platform game like many others - but with a twist. You must run and jump across the map in order to collect the coins and clear the levels; but instead of moving your player using keystrokes, you enter commands into a terminal and watch as he carries them out one at a time.
+
+A lot of thought was put into the sort of learning environment we wanted to create. We deliberately did not include time limits, health bars or a finite number of lives. The point of this game is to fail. You are not supposed to instinctively know the right sequence of commands to pass a level - like every budding software engineer you must start small, try a few things out, figure out what works and continuously iterate until you reach a full working solution.
 
 ## How to play
 
