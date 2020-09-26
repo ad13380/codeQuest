@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.com/ChrisCooney05/codeQuest.svg?branch=master)](https://travis-ci.com/ChrisCooney05/codeQuest)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e2dd292d-0968-4564-b990-02ce06425514/deploy-status)](https://app.netlify.com/sites/lets-codequest/deploys)
 
-[How to Play](#how-to-play) | [Team codeQuest()](<#Team-codeQuest()>) | [Technologies](#technologies) | [Installing Locally](#installing-locally) | [Additional Features](#additional-features)
+[How to Play](#how-to-play) | [Team codeQuest()](<#Team-codeQuest()>) | [Approach](#approach) | [Technologies](#technologies) | [Installing Locally](#installing-locally) | [Additional Features](#additional-features)
 
 </div>
 
