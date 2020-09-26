@@ -5,6 +5,8 @@
 [![Build Status](https://travis-ci.com/ChrisCooney05/codeQuest.svg?branch=master)](https://travis-ci.com/ChrisCooney05/codeQuest)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e2dd292d-0968-4564-b990-02ce06425514/deploy-status)](https://app.netlify.com/sites/lets-codequest/deploys)
 
+[How to Play](#how-to-play) | [Team codeQuest()](<#Team-codeQuest()>) | [Technologies](#technologies) | [Installing Locally](#installing-locally) | [Additional Features](#additional-features)
+
 </div>
 
 Welcome to codeQuest(), if you would like to give our game a try you can play it [here](https://lets-codequest.netlify.app/). This game also won [Best Project of August](https://careerkarma.com/discussions/projects/codequest-174/) as voted by the Career Karma community.
@@ -13,7 +15,7 @@ The goal of this project is to teach basic problem solving concepts to young chi
 
 A lot of thought was put into the sort of learning environment we wanted to create. We deliberately did not include time limits, health bars or a finite number of lives. The point of this game is to fail. You are not supposed to instinctively know the right sequence of commands to pass a level - like every budding software engineer you must start small, try a few things out, figure out what works and continuously iterate until you reach a full working solution.
 
-## How to play
+## How to Play
 
 Players are presented with an avatar (the ‘Hero’) which they can control by entering commands into the terminal and clicking the “Play” button. The avatar can perform simple movements by responding to single commands:
 
@@ -69,3 +71,11 @@ If you would rather play the game locally, or if you want to play with the sourc
    ```
    npm test will run all tests <br/>
    npm start will boot the server to port 3000 for you to play the game locally.
+
+## Additional Features
+
+Had we more time, we would also liked to have implemented:
+
+- Moving obstacles within some of the levels
+- Different ways of creating command chains, such as with the use of while loops
+- More types of avatar movements such as climbing
