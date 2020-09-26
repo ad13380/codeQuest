@@ -46,7 +46,7 @@ If the hero falls down a hole then he is sent back to the starting position of t
 
 ## Approach
 
-<img src="./public/prototyping.png" width="600px">
+<img src="./public/prototyping.png">
 
 ## Technologies
 
