@@ -83,7 +83,7 @@ If you would rather play the game locally, or if you want to play with the sourc
 
 ## Additional Features
 
-Had we more time, we would also liked to have implemented:
+With a longer project timeline, we would also like to have implemented:
 
 - Moving obstacles within some of the levels
 - Different ways of creating command chains, such as with the use of while loops
