@@ -64,7 +64,7 @@ Our initial prototype was focused around the implementation of basic game physic
 | CI/CD                | Travis                 |
 | Hosting              | Netflify               |
 | Styling              | CSS, Tachyons          |
-| testing and coverage | Jest                   |
+| Testing and Coverage | Jest                   |
 
 ## Installing Locally
 
